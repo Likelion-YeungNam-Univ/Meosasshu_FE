@@ -4,7 +4,7 @@
 
 | Role         | Name       | Github ID                               |
 | :----------- | :--------- | :-------------------------------------- |
-| **P&D**      | 허준우     |                                        |
+| **P&D**      | 허준우     | [@JunWooHeo00](https://github.com/JunWooHeo00)|
 | **Web Front**| 민서영     | [@mymooss](https://github.com/mymooss)  |
 |              | 권소희     | [@soooheeee](https://github.com/soooheeee) |
 |              | 정예은     | [@JJyen](https://github.com/JJyen)       |
