@@ -9,4 +9,4 @@
 |              | 권소희     | [@soooheeee](https://github.com/soooheeee) |
 |              | 정예은     | [@JJyen](https://github.com/JJyen)       |
 | **Server**   | 서민지     | [@chelmang](https://github.com/chelmang) |
-|              | 염동환     | [@soooheeee](https://github.com/soooheeee) |
+|              | 염동환     | [@Yeomdonghwan](https://github.com/Yeomdonghwan) |
