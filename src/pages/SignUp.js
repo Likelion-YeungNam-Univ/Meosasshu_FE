@@ -128,19 +128,9 @@ const SignUp = () => {
                         onChange={(e)=>{SetAuthenticationCode(e.target.value)}}>
                     </input>
             </div>
+            <Postcode/><br/>
+            <input type="submit" value={"가입하기"}></input>
         </form>
-        <form>
-            <div>
-                <div>주소등록</div>
-                <input type="text" placeholder="받는 분"></input><br/>
-                <input placeholder="우편번호"></input>
-                <Postcode/><br/>
-                <input placeholder="주소"></input><br/>
-                <input type="text" placeholder="상세주소"></input>
-            </div>
-        </form>
-        <input type="submit" value={"가입하기"}></input>
-        
         </>
     )
 }

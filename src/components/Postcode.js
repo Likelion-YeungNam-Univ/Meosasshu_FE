@@ -29,7 +29,16 @@ const Postcode = () => {
   };
 
   return (
-    <button type='button' onClick={handleClick}>주소찾기</button>
+    <form>
+    <div>
+        <div>주소등록</div>
+        <input type="text" placeholder="받는 분"></input><br/>
+        <input placeholder="우편번호"></input>
+        <button type='button' onClick={handleClick}>주소찾기</button><br/>
+        <input placeholder="주소"></input><br/>
+        <input type="text" placeholder="상세주소"></input>
+    </div>
+</form>
   );
 };
 
