@@ -26,8 +26,8 @@ const Postcode = () => {
     setAddress(fullAddress);
 
     console.log(fullAddress); //'서울 성동구 왕십리로2길 20 (성수동1가)'
-    console.log(data);
     console.log(data.zonecode); //우편번호
+    console.log(data); 
 
   };
 
