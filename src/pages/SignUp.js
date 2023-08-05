@@ -49,6 +49,15 @@ margin-right: 4px;
 margin-top: 3px;
 margin-bottom: 8px;
 
+&::-webkit-inner-spin-button{
+    -webkit-appearance: none; 
+    margin: 0; 
+    }
+&::-webkit-outer-spin-button{
+    -webkit-appearance: none; 
+    margin: 0; 
+    }
+
 @media only screen and (max-width: 430px) {
     width: 25vw;
     height: 5vh;
@@ -115,6 +124,12 @@ margin-top:20px;
     height: 8vh;
 }
 `;
+
+const ConfirmPwMsg= styled.p`
+color: #EB0000;
+margin-top: 0px;
+margin-bottom: 10px;
+font-size: 2.3vh`
 
 
 const SignUp = () => {
@@ -193,7 +208,7 @@ const SignUp = () => {
                         value={confirmPw}
                         onChange={(e)=>{setConfirmPw(e.target.value)}}>
                     </InputBox>
-                    <p>{confirmPwMsg}</p>
+                    <ConfirmPwMsg>{confirmPwMsg}</ConfirmPwMsg>
                 </div>
                 <div>
                     <FormList>이름</FormList>
@@ -206,7 +221,7 @@ const SignUp = () => {
                 <div>
                     <FormList>생년월일</FormList>
                     <InputYearDay 
-                        type="text" 
+                        type="number" 
                         placeholder="년(4자)"
                         value={year}
                         onChange={(e)=>{setYear(e.target.value)}}>
@@ -216,7 +231,7 @@ const SignUp = () => {
                         {monthOptions.map((item) => (<option key={item.key} value={item.value}>{item.value}</option>))}
                     </MonthOption>
                     <InputYearDay
-                        type="text" 
+                        type="number" 
                         placeholder="일"
                         value={day}
                         onChange={(e)=>{setDay(e.target.value)}}>
