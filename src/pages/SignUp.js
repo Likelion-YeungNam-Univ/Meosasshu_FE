@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components'
 import Postcode from "../components/Postcode";
+import logoPath from '../assets/logo.png';
 
 const FormList = styled.div`
 font-size: 2vh;
@@ -65,14 +66,14 @@ margin-bottom: 8px;
     height: 5.5vh;
 }`;
 const GenderOption = styled.select`
-width: 350px ;
+width: 360px ;
 height: 45px;
 border: 2px solid #DEDEDE;
 margin-top: 3px;
 margin-bottom: 8px;
 
 @media only screen and (max-width: 430px) {
-    width: 81vw;
+    width: 82vw;
     height: 5.5vh;
 }`;
 const AuthenticationCodeBtn= styled.input`
@@ -83,23 +84,38 @@ background-color: #FF607F;
 border: none;
 color: white;
 
+
 @media only screen and (max-width: 430px) {
     width: 20vw;
     height: 5.5vh;
+    padding:0vh;
+    font-size: 1.5vh;
 }`;
 
 const SignUpBtn= styled.input`
-width: 350px ;
+width: 355px ;
 height: 45px;
 background-color: #FF607F;
 border: none;
 color: white;
 font-weight: bold;
+font-size: 15px;
+margin-bottom: 20px;
 
 @media only screen and (max-width: 430px) {
     width: 83vw;
     height: 6vh;
 }`;
+
+const Logo= styled.img`
+margin-top:20px;
+
+@media only screen and (max-width: 430px) {
+    width: 83vw;
+    height: 8vh;
+}
+`;
+
 
 const SignUp = () => {
 
@@ -130,7 +146,7 @@ const SignUp = () => {
         {key:12, value:"12월"},
     ]
 
-    const sexOption = [
+    const genderOption = [
         {key:1, value:"남자"},
         {key:2, value:"여자"},
     ]
@@ -153,7 +169,7 @@ const SignUp = () => {
         <>
         <SignUpForm>
             <form>
-            <h1>로고</h1>
+                <Logo src={logoPath} alt="logo"></Logo>
                 <div>
                     <FormList>아이디</FormList>
                     <InputBox 
@@ -210,7 +226,7 @@ const SignUp = () => {
                     <FormList>성별</FormList>
                     <GenderOption onChange={(e)=>{setGender(e.currentTarget.value)}} value={gender}>
                         <option>성별</option>
-                        {sexOption.map((item) => (<option key={item.key} value={item.value}>{item.value}</option>))}
+                        {genderOption.map((item) => (<option key={item.key} value={item.value}>{item.value}</option>))}
                     </GenderOption>
                 </div>
                 <div>
