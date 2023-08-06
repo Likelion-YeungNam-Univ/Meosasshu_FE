@@ -50,7 +50,9 @@ const Search = () => {
 };
 
 const WideTextField = styled(TextField)`
-  width: 400px; /* Set the desired width here */
+  width:100%; /* Set the desired width here */
+  margin-left:10px;
+  display: flex;
 `;
 
 export default Search;
