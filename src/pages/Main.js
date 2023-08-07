@@ -12,8 +12,7 @@ const Main = () => {
   return (
     <>
       <NavContainer>
-        <Logo>
-          <img src={logo} alt="로고" />
+        <Logo src={logo} alt="로고">
         </Logo>
        <Search />
       </NavContainer>
@@ -50,10 +49,10 @@ display: flex;
 width: 12vw; /* 로고 너비 조절 */
 height: 6vh; /* 로고 높이 조절 */
 
-img {
-  width: 100%; /* 로고 이미지 가로 크기를 컨테이너에 맞추기 */
-  height: 100%; /* 이미지 비율 유지 */
-}
+// img {
+//   width: 100%; /* 로고 이미지 가로 크기를 컨테이너에 맞추기 */
+//   height: 100%; /* 이미지 비율 유지 */
+// }
 `;
 
 
