@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components'
 import Postcode from "../components/Postcode";
-import logoPath from '../assets/logo.png';
+import logoPath from '../assets/logo2.jpg';
 
 const FormList = styled.div`
 font-size: 2vh;
