@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import UserIcon from "../assets/idicon.png"; 
 import PasswordIcon  from "../assets/pwicon.png"; 
-import Logo from "../assets/logo2.jpg";
+import Logo from "../assets/logo2.png";
 import Nav from '../components/Nav';
 
 
