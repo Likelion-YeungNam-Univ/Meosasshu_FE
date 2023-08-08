@@ -7,14 +7,18 @@ import Order from "../assets/주문조회.png";
 import Recommend from "../assets/추천상품.png";
 import logo from '../assets/logo.png';
 import Search from "../components/Search";
+import "../assets/font/style.css"
 
 const Main = () => {
   return (
     <>
+    <GlobalStyle>
       <NavContainer>
-        <Logo src={logo} alt="로고">
+        <Logo>
+          <img src={logo} alt="로고" />
         </Logo>
-       <Search />
+
+        <Search />
       </NavContainer>
       <NavGrid>
         {/* 카테고리 */}
@@ -34,46 +38,50 @@ const Main = () => {
           <img src={Mypage} alt="마이페이지" />
         </NavItem>
       </NavGrid>
-      <p>50대를 위한 추천 상품</p>
-      <p>더보기</p>
-      <img src={Recommend} alt="마이페이지" />
-      
+      <RecommendSection>
+        <h3>50대를 위한 추천 상품</h3>
+        <p>더보기> </p>
+      </RecommendSection>
+      <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <img src={Recommend} alt="추천상품" />
+      </div>
+      </GlobalStyle>
     </>
   );
 };
 
 export default Main;
 
-const Logo = styled.div`
-display: flex;
-width: 12vw; /* 로고 너비 조절 */
-height: 6vh; /* 로고 높이 조절 */
-
-// img {
-//   width: 100%; /* 로고 이미지 가로 크기를 컨테이너에 맞추기 */
-//   height: 100%; /* 이미지 비율 유지 */
-// }
+const GlobalStyle = styled.div`
+  body {
+   font-family: Inter Italic;
+  }
+  font-family: Inter Italic;
 `;
 
+const Logo = styled.div`
+  display: flex;
+  width: 15vw; /* 로고 너비 조절 */
+  height: auto; /* 로고 높이 조절 */
+  margin-right: 10px;
+  margin: 5px;
+
+  img {
+    width: 100%; /* 로고 이미지 가로 크기를 컨테이너에 맞추기 */
+    height: 100%; /* 이미지 비율 유지 */
+  }
+`;
 
 // 카테고리, 배송정보, 주문조회, 마이페이지를 감싸는 컨테이너 스타일
 const NavContainer = styled.div`
   display: flex;
-  justify-content: space-between;
   align-items: center; /* 로고와 검색 컴포넌트 가운데 정렬 */
   margin-bottom: 10px;
 `;
 
-// Logo 스타일 수정
-// const Logo = styled.div`
-//   display: flex;
-//   align-items: center;
-//   width: 10vw; /* 로고 너비 조절 */
-//   height: 6vh; /* 로고 높이 조절 */
-// `;
-
 // 네비게이션 아이템을 담을 그리드 스타일
 const NavGrid = styled.div`
+  margin-top: 30px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-auto-rows: minmax(175px, auto); /* 세로 크기 설정 */
@@ -87,5 +95,21 @@ const NavItem = styled.div`
     width: 100%;
     height: 100%; /* 세로 크기를 셀 크기에 맞게 조절 */
     object-fit: cover; /* 이미지 비율 유지하며 셀 내에 꽉 차게 표시 */
+  }
+`;
+
+// 추천 상품 섹션 스타일
+const RecommendSection = styled.div`
+  display: flex;
+  align-items: center;
+  margin-top: 20px;
+  h3 {
+    margin-left: 10px;
+    text-weight: bold;
+  }
+  p {
+    margin-left: 130px;
+    cursor: pointer;
+    color: #B4B4B4;
   }
 `;
