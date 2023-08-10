@@ -37,7 +37,7 @@ const Navbar = (props) => {
       <BackButton to="/"/>
     </NavbarContainer>
     <CenteredContent>
-      <p>{typeof props === 'string' ? props : ' '}</p> {/*보내주는 값이 없으면 공백 나타내기*/}
+      <p>{typeof props.children === 'string' ? props.children : ' '}</p> {/*보내주는 값이 없으면 공백 나타내기*/}
     </CenteredContent>
     </>
   );
