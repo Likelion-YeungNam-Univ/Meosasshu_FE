@@ -8,6 +8,7 @@ import Review from "./pages/Review";
 import SignUp from "./pages/SignUp";
 import Payment from "./pages/Payment";
 import Profile from "./pages/Profile";
+import "./App.css"
 
 const App = () =>{
   return(
