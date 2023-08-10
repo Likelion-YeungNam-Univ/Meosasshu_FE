@@ -7,25 +7,11 @@ import Nav from '../components/Nav';
 
 
 const Login = () => {
-  const [id, setId] = useState('');
+  const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
-  
-  const [idValid, setIdValid] = useState(false);
-
-  const handleId = (e) => {
-    setId(e.target.value);
-    const regex =
-      /^(([^<>()\[\].,;:\s@"]+(\.[^<>()\[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
-    if (regex.test(e.target.value)) {
-      setIdValid(true);
-    } else {
-      setIdValid(false);
-    }
-  };
-
 
   return(
-    <setion>
+    <section>
       <LoginPageContainer>
         <LoginForm>
           <Nav/>
@@ -35,17 +21,15 @@ const Login = () => {
             <InputBox>
                 <div>
                     <Inputld
-                     type='id'
-                     id="id"
+                     type='email'
+                     id="email"
                      placeholder="아이디"
-                     value={id}
-                     onChange={handleId} 
+                     value={email}
+                     onChange={(e) => setEmail(e.target.value)}
                      required //아무것도 입력되지 않았을 때, 입력하라는 문구
                     />
                 </div>
-                <div>
-                    {!idValid && id.length > 0 && (<div>올바른 이메일을 입력해주세요.</div>)}
-                </div>
+               
                 <div>
                  <InputPw
                     type='password'
@@ -71,7 +55,7 @@ const Login = () => {
             </p>
         </LoginForm>
     </LoginPageContainer>
-</setion>
+</section>
 )
 }
 
@@ -82,19 +66,17 @@ const LoginPageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; 
+  
 `;
 
 const LoginForm = styled.form`
-  border: 1px solid #ccc;
   padding: 20px;
-  width: 300px;
-
+  width: 350px; /* 폼의 너비를 더 넓게 조절 */
+  
   @media (max-width: 768px) {
-    width: 80%;
+    width: 100%;
   }
 `;
-
 
 const SharedStyles = `
   display: block;
@@ -126,11 +108,13 @@ const Icon = styled.img`
 const Inputld = styled.input`
     ${SharedStyles}
     border-bottom: 2px solid #D8D8D8;
-    padding-left: 25px; /* 아이콘 공간을 만들기 위한 간격 설정 */
-    background: url(${UserIcon}) no-repeat 8px center; /* 아이콘을 배경 이미지로 설정 */
-    background-size: 9px; /* 아이콘 크기 설정 */
-    &::placeholder{
+    padding-left: 25px;
+    background: url(${UserIcon}) no-repeat 8px center;
+    background-size: 9px;
+    &::placeholder {
       color: #D8D8D8;
+    }
+    width: 100%; 
 `;
 
 const InputPw = styled.input`
@@ -138,8 +122,10 @@ const InputPw = styled.input`
   padding-left: 25px;
   background: url(${PasswordIcon}) no-repeat 4px center;
   background-size: 16px;
-  &::placeholder{
+  &::placeholder {
     color: #D8D8D8;
+  }
+  width: 100%; 
 `;
 
 const InputBox = styled.div`
@@ -152,24 +138,22 @@ const InputBox = styled.div`
 
 
 const SubmitButton = styled.button`
-  background-color: #FF607F;
-  margin-top:5px;
-  color:white;
-  width: 100%;
-  padding: 8px 20px;
+  background-color: #BCC454;
+  margin-top: 15px; /* 마진 조절 */
+  color: white;
+  width: 100%; /* 로그인 버튼의 길이를 100%로 설정 */
+  padding: 10px 20px; /* 패딩 조절 */
   font-size: 16px;
-  border: 1px solid ;
-  border-radius:5px ;
+  border: 2px solid #BCC454;
+  border-radius: 5px;
   cursor: pointer;
-  border: 2px solid #FF607F;
 `;
-
 const SignUpButton = styled.a`
-  color:#FF607F;
+  color:#BCC454;
   text-decoration-line: none;
   margin-top: 10px;
   display: flex;
   justify-content: center;
-  font-size:5px;
+  font-size:13px;
   margin-bottom:100%;
 `;
