@@ -21,19 +21,15 @@ const Main = () => {
         <Search />
       </NavContainer>
       <NavGrid>
-        {/* 카테고리 */}
         <NavItem>
           <img src={Category} alt="카테고리" />
         </NavItem>
-        {/* 배송정보 */}
         <NavItem>
           <img src={Delive} alt="배송정보" />
         </NavItem>
-        {/* 주문조회 */}
         <NavItem>
           <img src={Order} alt="주문조회" />
         </NavItem>
-        {/* 마이페이지 */}
         <NavItem>
           <img src={Mypage} alt="마이페이지" />
         </NavItem>
@@ -61,14 +57,14 @@ const GlobalStyle = styled.div`
 
 const Logo = styled.div`
   display: flex;
-  width: 15vw; /* 로고 너비 조절 */
-  height: auto; /* 로고 높이 조절 */
+  width: 15vw;
+  height: auto;
   margin-right: 10px;
   margin: 5px;
 
   img {
-    width: 100%; /* 로고 이미지 가로 크기를 컨테이너에 맞추기 */
-    height: 100%; /* 이미지 비율 유지 */
+    width: 100%;
+    height: 100%;
   }
 `;
 
