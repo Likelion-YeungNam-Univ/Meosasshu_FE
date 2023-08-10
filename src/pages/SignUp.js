@@ -29,18 +29,18 @@ margin-bottom: 8px;
     width: 81vw;
     height: 5vh;
 }`;
-const InputTel = styled.input`
-width: 277px ;
-height: 40px;
-border: 2px solid #DEDEDE;
-margin-top: 3px;
-margin-botton: 4px;
-margin-right: 4px;
+// const InputTel = styled.input`
+// width: 277px ;
+// height: 40px;
+// border: 2px solid #DEDEDE;
+// margin-top: 3px;
+// margin-botton: 4px;
+// margin-right: 4px;
 
-@media only screen and (max-width: 430px) {
-    width: 59.5vw;
-    height: 5vh;
-}`;
+// @media only screen and (max-width: 430px) {
+//     width: 59.5vw;
+//     height: 5vh;
+// }`;
 const InputYearDay = styled.input`
 width: 112px ;
 height: 40px;
@@ -84,21 +84,6 @@ margin-bottom: 8px;
 @media only screen and (max-width: 430px) {
     width: 82vw;
     height: 5.5vh;
-}`;
-const AuthenticationCodeBtn= styled.input`
-width: 69px ;
-height: 45px;
-font-size: 10px;
-background-color: #FF607F;
-border: none;
-color: white;
-
-
-@media only screen and (max-width: 430px) {
-    width: 20vw;
-    height: 5.5vh;
-    padding:0vh;
-    font-size: 1.5vh;
 }`;
 
 const SignUpBtn= styled.input`
@@ -144,7 +129,7 @@ const SignUp = () => {
     const [day,setDay]=useState("");
     const [gender, setGender]=useState("")
     const [tel,setTel]=useState("")
-    const [authenticationCode,SetAuthenticationCode]=useState("")
+
 
     const monthOptions = [
         {key:1, value:"1월"},
@@ -246,19 +231,12 @@ const SignUp = () => {
                 </div>
                 <div>
                     <FormList>전화번호</FormList>
-                    <InputTel
+                    <InputBox
                         type="tel" 
                         value={tel}
                         placeholder="전화번호 입력" 
                         onChange={(e)=>{setTel(e.target.value)}}>
-                    </InputTel>
-                    <AuthenticationCodeBtn type="submit" value={"인증번호받기"}></AuthenticationCodeBtn>
-                    <br/><InputBox
-                            type="text" 
-                            value={authenticationCode}
-                            placeholder="인증번호 입력"
-                            onChange={(e)=>{SetAuthenticationCode(e.target.value)}}>
-                        </InputBox>
+                    </InputBox>
                 </div>
                 <Postcode/><br/>
                 <SignUpBtn type="submit" value={"가입하기"}></SignUpBtn>
