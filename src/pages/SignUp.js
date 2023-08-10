@@ -89,7 +89,7 @@ margin-bottom: 8px;
 const SignUpBtn= styled.input`
 width: 355px ;
 height: 45px;
-background-color: #FF607F;
+background-color: #BCC454;
 border: none;
 color: white;
 font-weight: bold;
@@ -102,11 +102,14 @@ margin-bottom: 20px;
 }`;
 
 const Logo= styled.img`
+display: block;
+margin: auto;
 margin-top:20px;
 
 @media only screen and (max-width: 430px) {
     width: 83vw;
     height: 8vh;
+    margin-bottom:10px;
 }
 `;
 
@@ -169,7 +172,7 @@ const SignUp = () => {
         <>
         <SignUpForm>
             <form>
-                <Logo src={logoPath} alt="logo"></Logo>
+            <Logo src={logoPath} alt="logo"></Logo>
                 <div>
                     <FormList>아이디</FormList>
                     <InputBox 

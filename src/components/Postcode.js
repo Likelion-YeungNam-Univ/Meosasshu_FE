@@ -36,7 +36,7 @@ const SearchAddBtn= styled.button`
 width: 69px ;
 height: 45px;
 font-size: 10px;
-background-color: #FF607F;
+background-color: #BCC454;
 border: none;
 color: white;
 font-size: 1.7vh;
