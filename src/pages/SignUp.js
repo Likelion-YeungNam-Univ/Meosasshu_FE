@@ -1,5 +1,124 @@
 import React, { useState, useEffect } from "react";
+import styled from 'styled-components'
 import Postcode from "../components/Postcode";
+import logoPath from '../assets/logo2.png';
+
+const FormList = styled.div`
+font-size: 2vh;
+font-weight: bold;
+`;
+const SignUpForm = styled.div`
+//background-color: lightblue;
+width:365px;
+display: flex;
+align-items: center;
+margin: auto;
+
+@media only screen and (max-width: 430px) {
+    //background-color: pink;
+    width:84vw;
+}`;
+const InputBox = styled.input`
+width: 350px ;
+height: 40px;
+border: 2px solid #DEDEDE;
+margin-top: 3px;
+margin-bottom: 8px;
+
+@media only screen and (max-width: 430px) {
+    width: 81vw;
+    height: 5vh;
+}`;
+// const InputTel = styled.input`
+// width: 277px ;
+// height: 40px;
+// border: 2px solid #DEDEDE;
+// margin-top: 3px;
+// margin-botton: 4px;
+// margin-right: 4px;
+
+// @media only screen and (max-width: 430px) {
+//     width: 59.5vw;
+//     height: 5vh;
+// }`;
+const InputYearDay = styled.input`
+width: 112px ;
+height: 40px;
+border: 2px solid #DEDEDE;
+margin-right: 4px;
+margin-top: 3px;
+margin-bottom: 8px;
+
+&::-webkit-inner-spin-button{
+    -webkit-appearance: none; 
+    margin: 0; 
+    }
+&::-webkit-outer-spin-button{
+    -webkit-appearance: none; 
+    margin: 0; 
+    }
+
+@media only screen and (max-width: 430px) {
+    width: 25vw;
+    height: 5vh;
+}`;
+const MonthOption = styled.select`
+width: 112px ;
+height: 44px;
+border: 2px solid #DEDEDE;
+margin-right: 4px;
+margin-top: 3px;
+margin-bottom: 8px;
+
+@media only screen and (max-width: 430px) {
+    width: 26vw;
+    height: 5.5vh;
+}`;
+const GenderOption = styled.select`
+width: 360px ;
+height: 45px;
+border: 2px solid #DEDEDE;
+margin-top: 3px;
+margin-bottom: 8px;
+
+@media only screen and (max-width: 430px) {
+    width: 82vw;
+    height: 5.5vh;
+}`;
+
+const SignUpBtn= styled.input`
+width: 355px ;
+height: 45px;
+background-color: #BCC454;
+border: none;
+color: white;
+font-weight: bold;
+font-size: 15px;
+margin-bottom: 20px;
+
+@media only screen and (max-width: 430px) {
+    width: 83vw;
+    height: 6vh;
+}`;
+
+const Logo= styled.img`
+display: block;
+margin: auto;
+margin-top:20px;
+
+@media only screen and (max-width: 430px) {
+    width: 83vw;
+    height: 8vh;
+    margin-bottom:10px;
+}
+`;
+
+const ConfirmPwMsg= styled.p`
+color: #EB0000;
+margin-top: 0px;
+margin-bottom: 10px;
+font-size: 2.3vh`
+
 
 const SignUp = () => {
 
@@ -11,9 +130,9 @@ const SignUp = () => {
     const [year,setYear]=useState("");
     const [month,setMonth]=useState("");
     const [day,setDay]=useState("");
-    const [sex, setSex]=useState("")
+    const [gender, setGender]=useState("")
     const [tel,setTel]=useState("")
-    const [authenticationCode,SetAuthenticationCode]=useState("")
+
 
     const monthOptions = [
         {key:1, value:"1월"},
@@ -30,7 +149,7 @@ const SignUp = () => {
         {key:12, value:"12월"},
     ]
 
-    const sexOption = [
+    const genderOption = [
         {key:1, value:"남자"},
         {key:2, value:"여자"},
     ]
@@ -51,86 +170,81 @@ const SignUp = () => {
 
     return(
         <>
-        <h1>로고</h1>
-        <form>
-            <div>
-                <div>아이디</div>
-                <input 
-                    type="email" 
-                    value={email}
-                    onChange={(e)=>{setEmail(e.target.value)}}>
-                </input>
-            </div>
-            <div>
-                <div>비밀번호</div>
-                <input 
-                    type="password"
-                    value={pw}
-                    onChange={(e)=>{setPw(e.target.value)}}>
-                </input>
-            </div>
-            <div>
-                <div>비밀번호 재확인</div>   
-                <input 
-                    type="password"
-                    value={confirmPw}
-                    onChange={(e)=>{setConfirmPw(e.target.value)}}>
-                </input>
-                <p>{confirmPwMsg}</p>
-            </div>
-            <div>
-                <div>이름</div>
-                <input 
-                    type="text"
-                    value={name}
-                    onChange={(e)=>{setName(e.target.value)}}>
-                </input>
-            </div>
-            <div>
-                <div>생년월일</div>
-                <input 
-                    type="text" 
-                    placeholder="년(4자)"
-                    value={year}
-                    onChange={(e)=>{setYear(e.target.value)}}>
-                </input>
-                <select onChange={(e)=>{setMonth(e.currentTarget.value)}} value={month}>
-                    <option>월</option>
-                    {monthOptions.map((item) => (<option key={item.key} value={item.value}>{item.value}</option>))}
-                </select>
-                <input 
-                    type="text" 
-                    placeholder="일"
-                    value={day}
-                    onChange={(e)=>{setDay(e.target.value)}}>
-                </input>
-            </div>
-            <div>
-                <div>성별</div>
-                <select onChange={(e)=>{setSex(e.currentTarget.value)}} value={sex}>
-                    <option>성별</option>
-                    {sexOption.map((item) => (<option key={item.key} value={item.value}>{item.value}</option>))}
-                </select>
-            </div>
-            <div>
-                <div>전화번호</div>
-                <input 
-                    type="tel" 
-                    value={tel}
-                    placeholder="전화번호 입력" 
-                    onChange={(e)=>{setTel(e.target.value)}}>
-                </input>
-                <input type="submit" value={"인증번호받기"}></input>
-                <br/><input 
-                        type="text" 
-                        value={authenticationCode}
-                        placeholder="인증번호 입력"
-                        onChange={(e)=>{SetAuthenticationCode(e.target.value)}}>
-                    </input>
-            </div>
-            <Postcode/><br/>
-            <input type="submit" value={"가입하기"}></input>
-        </form>
+        <SignUpForm>
+            <form>
+            <Logo src={logoPath} alt="logo"></Logo>
+                <div>
+                    <FormList>아이디</FormList>
+                    <InputBox 
+                        type="email" 
+                        value={email}
+                        onChange={(e)=>{setEmail(e.target.value)}}>
+                    </InputBox>
+                </div>
+                <div>
+                    <FormList>비밀번호</FormList>
+                    <InputBox 
+                        type="password"
+                        value={pw}
+                        onChange={(e)=>{setPw(e.target.value)}}>
+                    </InputBox>
+                </div>
+                <div>
+                    <FormList>비밀번호 재확인</FormList>   
+                    <InputBox 
+                        type="password"
+                        value={confirmPw}
+                        onChange={(e)=>{setConfirmPw(e.target.value)}}>
+                    </InputBox>
+                    <ConfirmPwMsg>{confirmPwMsg}</ConfirmPwMsg>
+                </div>
+                <div>
+                    <FormList>이름</FormList>
+                    <InputBox 
+                        type="text"
+                        value={name}
+                        onChange={(e)=>{setName(e.target.value)}}>
+                    </InputBox>
+                </div>
+                <div>
+                    <FormList>생년월일</FormList>
+                    <InputYearDay 
+                        type="number" 
+                        placeholder="년(4자)"
+                        value={year}
+                        onChange={(e)=>{setYear(e.target.value)}}>
+                    </InputYearDay>
+                    <MonthOption onChange={(e)=>{setMonth(e.currentTarget.value)}} value={month}>
+                        <option>월</option>
+                        {monthOptions.map((item) => (<option key={item.key} value={item.value}>{item.value}</option>))}
+                    </MonthOption>
+                    <InputYearDay
+                        type="number" 
+                        placeholder="일"
+                        value={day}
+                        onChange={(e)=>{setDay(e.target.value)}}>
+                    </InputYearDay>
+                </div>
+                <div>
+                    <FormList>성별</FormList>
+                    <GenderOption onChange={(e)=>{setGender(e.currentTarget.value)}} value={gender}>
+                        <option>성별</option>
+                        {genderOption.map((item) => (<option key={item.key} value={item.value}>{item.value}</option>))}
+                    </GenderOption>
+                </div>
+                <div>
+                    <FormList>전화번호</FormList>
+                    <InputBox
+                        type="tel" 
+                        value={tel}
+                        placeholder="전화번호 입력" 
+                        onChange={(e)=>{setTel(e.target.value)}}>
+                    </InputBox>
+                </div>
+                <Postcode/><br/>
+                <SignUpBtn type="submit" value={"가입하기"}></SignUpBtn>
+            </form>
+        </SignUpForm>
         </>
     )
 }

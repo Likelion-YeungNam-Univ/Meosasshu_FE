@@ -24,11 +24,22 @@ const BackButton = styled(Link)`
   align-items: center;
 `;
 
-const Navbar = () => {
+const CenteredContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const Navbar = (props) => {
   return (
+    <>
     <NavbarContainer>
       <BackButton to="/"/>
     </NavbarContainer>
+    <CenteredContent>
+      <p>{typeof props.children === 'string' ? props.children : ' '}</p> {/*보내주는 값이 없으면 공백 나타내기*/}
+    </CenteredContent>
+    </>
   );
 };
 
