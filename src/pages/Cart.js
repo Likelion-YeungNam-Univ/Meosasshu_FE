@@ -1,7 +1,6 @@
 import React from "react";
 import styled from 'styled-components'
 import Navbar from "../components/Nav";
-import CartListCheck from "../components/cart/CartListCheck";
 import CartList from "../components/cart/CartList";
 import OrderBtn from "../components/cart/OrderBtn";
 
@@ -20,8 +19,8 @@ const Cart = () => {
     return(
         <>
         <CartBox>
-        <Navbar></Navbar>
-        <div><CartListCheck/></div>
+        <Navbar>장바구니</Navbar>
+        <hr style={{border:'solid 1.5px #F0F1F5'}}/>
         <CartList/>
         <OrderBtn/>
         </CartBox>
