@@ -12,7 +12,7 @@ const NavbarContainer = styled.div`
 const BackButton = styled(Link)`
   text-decoration: none;
   color: black;
-  padding: 5px 3px;
+  padding: 5px 3px ;
   border: 1px solid #fff;
   background-image: url(${BackIcon});
   background-size: cover;
@@ -21,7 +21,6 @@ const BackButton = styled(Link)`
   display: flex;
   justify-content: center;
   align-items: center;
- 
 `;
 
 
@@ -33,7 +32,7 @@ const CenteredContent = styled.div`
   margin-right:25px;
 `;
 
-const Navbar = (props) => {
+const Nav = (props) => {
   return (
     <NavbarContainer>
       <BackButton to="/" />
@@ -44,4 +43,4 @@ const Navbar = (props) => {
   );
 };
 
-export default Navbar;
+export default Nav;

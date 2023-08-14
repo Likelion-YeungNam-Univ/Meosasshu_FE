@@ -7,9 +7,10 @@ justify-content: space-between;
 width:365px;
 margin: auto;
 margin-top: 20px;
+margin-bottom: 20px;
 
 @media only screen and (max-width: 430px) {
-    width:84vw;
+    max-width: auto;
 }`;
 
 const Header = (props) => {
@@ -17,9 +18,9 @@ const Header = (props) => {
         <>
         <HeaderBox>
             <svg xmlns="http://www.w3.org/2000/svg" width="29" height="28" viewBox="0 0 29 28" fill="none">
-                <path d="M1.97363 2H26.9736" stroke="black" stroke-width="2.5" stroke-linecap="round"/>
-                <path d="M1.97363 14H26.9736" stroke="black" stroke-width="2.5" stroke-linecap="round"/>
-                <path d="M1.97363 26H26.9736" stroke="black" stroke-width="2.5" stroke-linecap="round"/>
+                <path d="M1.97363 2H26.9736" stroke="black" strokeWidth="2.5" strokeLinecap="round"/>
+                <path d="M1.97363 14H26.9736" stroke="black" strokeWidth="2.5" strokeLinecap="round"/>
+                <path d="M1.97363 26H26.9736" stroke="black" strokeWidth="2.5" strokeLinecap="round"/>
             </svg>
 
             <span style={{marginLeft:'40px', fontSize:'20px', fontWeight:'600'}}>{props.children}</span>

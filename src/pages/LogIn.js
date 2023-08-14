@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import UserIcon from "../assets/idicon.png"; 
 import PasswordIcon  from "../assets/pwicon.png"; 
-import Logo from "../assets/logo.png";
+import Logo from "../assets/logo2.png";
 import Nav from '../components/Nav';
 
 
@@ -71,7 +71,7 @@ const LoginPageContainer = styled.div`
 
 const LoginForm = styled.form`
   padding: 20px;
-  width: 350px; /* 폼의 너비를 더 넓게 조절 */
+  width: 365px; /* 폼의 너비를 더 넓게 조절 */
   
   @media (max-width: 768px) {
     width: 100%;
