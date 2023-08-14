@@ -7,40 +7,41 @@ const NavbarContainer = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 1px;
-  
 `;
 
 const BackButton = styled(Link)`
   text-decoration: none;
   color: black;
-  padding: 5px 3px;
+  padding: 5px 3px ;
   border: 1px solid #fff;
-  background-image: url(${BackIcon}); // 아이콘 이미지를 배경 이미지로 설정
-  background-size: cover; // 배경 이미지 크기를 조정
-  width: 20px; // 버튼의 크기를 조정
+  background-image: url(${BackIcon});
+  background-size: cover;
+  width: 20px;
   height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left:10px;
 `;
+
 
 const CenteredContent = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex: 1; /* 중앙 정렬을 위해 추가 */
+  margin-right:25px;
 `;
 
-const Navbar = (props) => {
+const Nav = (props) => {
   return (
-    <>
     <NavbarContainer>
-      <BackButton to="/"/>
+      <BackButton to="/" />
+      <CenteredContent>
+        {typeof props.children === 'string' ? props.children : ' '}
+      </CenteredContent>
     </NavbarContainer>
-    <CenteredContent>
-      <p>{typeof props.children === 'string' ? props.children : ' '}</p> {/*보내주는 값이 없으면 공백 나타내기*/}
-    </CenteredContent>
-    </>
   );
 };
 
-export default Navbar;
+export default Nav;
