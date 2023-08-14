@@ -1,45 +1,32 @@
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import BackIcon from '../assets/arrow.png';
 
 const NavbarContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1px;
-`;
+margin-top: 20px;
+margin-bottom: 20px;
+
+@media only screen and (max-width: 430px) {
+    max-width: auto;
+}`;
 
 const BackButton = styled(Link)`
-  text-decoration: none;
-  color: black;
-  padding: 5px 3px ;
-  border: 1px solid #fff;
-  background-image: url(${BackIcon});
-  background-size: cover;
-  width: 20px;
-  height: 20px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+margin-left: 5px;
 `;
 
-
-const CenteredContent = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1; /* 중앙 정렬을 위해 추가 */
-  margin-right:25px;
-`;
 
 const Nav = (props) => {
   return (
+    <>
     <NavbarContainer>
-      <BackButton to="/" />
-      <CenteredContent>
-        {typeof props.children === 'string' ? props.children : ' '}
-      </CenteredContent>
+      <BackButton to="/">
+      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+      <path d="M16 7H3.83L9.42 1.41L8 0L0 8L8 16L9.41 14.59L3.83 9H16V7Z" fill="black"/>
+      </svg>
+      </BackButton>
+
+      <span style={{marginLeft:'150px', fontSize:'20px', fontWeight:'600'}}>{props.children}</span>
     </NavbarContainer>
+    </>
   );
 };
 
