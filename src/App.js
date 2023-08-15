@@ -9,6 +9,7 @@ import SignUp from "./pages/SignUp";
 import Payment from "./pages/Payment";
 import Profile from "./pages/Profile";
 import "./App.css"
+import ProductList from "./pages/ProductList";
 
 const App = () =>{
   return(
@@ -22,6 +23,7 @@ const App = () =>{
       <Route path='/review' element={<Review />}></Route>
       <Route path='/payment' element={<Payment />}></Route>
       <Route path='/profile' element={<Profile />}></Route>
+      <Route path='/productlist' element={<ProductList />}></Route>
     </Routes>
     </BrowserRouter>
   )
