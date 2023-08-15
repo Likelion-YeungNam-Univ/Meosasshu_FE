@@ -5,7 +5,7 @@ const ProductBox = () => {
   return (
     <section>
       <ProductContainer>
-          <ItemImage src="https://via.placeholder.com/180x180" alt="상품 이미지" />
+          <ItemImage src="https://via.placeholder.com/165x165" alt="상품 이미지" />
           <ItemTitle>상품 이름</ItemTitle>
           <ItemDescription>상품 설명란</ItemDescription>
           <ItemPrice>상품 가격</ItemPrice>
@@ -18,7 +18,7 @@ export default ProductBox;
 
 const ProductContainer = styled.div`
     padding: 5px;
-    width: 185px; 
+    width: 170px; 
     height: 300px;
 `;
 
