@@ -5,7 +5,7 @@ import Nav from "../components/Nav";
 const CancelHistory = () => {
     return(
         <>
-            <Nav>취소/교환/환불 내역</Nav>
+            <Nav backTo="/profile">취소/교환/환불 내역</Nav>
             <CenteredText>취소/교환/환불 내역이 없습니다.</CenteredText>
         </>
     )
