@@ -5,8 +5,17 @@ import HomeIcon from '@mui/icons-material/Home';
 import MicIcon from '@mui/icons-material/Mic';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import Mic from '../assets/clickMic.png';
 
 const TapBar = () => {
+    const [clickMic,setClickMic]=useState(true);
+
+    const handleMic =  () => {
+        setClickMic(!clickMic)
+    };
+
+
 
     return (
         <>
@@ -30,8 +39,11 @@ const TapBar = () => {
                 </TapBarMenuLink>
             </div>
             <div style={{textAlign:'center'}}>
-                 <TapBarMenuLink to='/'> {/*음성페이지 추가 후에 연결 */}
-                    <MicIcon fontSize='large' sx={{color:'#BCC454', marginTop:'10px'}}/>
+                 <TapBarMenuLink to=''> {/*음성페이지 추가 후에 연결 */}
+                    {clickMic ? 
+                            <MicIcon fontSize='large' sx={{color:'#BCC454', marginTop:'10px'}} onClick={handleMic}/>
+                            : <MicImg src={Mic} alt="mic" onClick={handleMic} />}
+                    
                     <TapBarMenuName style={{color:'#BCC454'}}>음성 검색</TapBarMenuName>
                 </TapBarMenuLink>
             </div>
@@ -75,4 +87,10 @@ font-weight: 500;
 const TapBarMenuLink= styled(Link)`
 color: #000;
 text-decoration: none;
+`;
+
+const MicImg= styled.img`
+width: 35px;
+height: 35px;
+margin-top: 10px;
 `;
