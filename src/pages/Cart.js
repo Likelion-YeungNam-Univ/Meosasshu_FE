@@ -1,6 +1,6 @@
 import React from "react";
 import styled from 'styled-components'
-import Navbar from "../components/Nav";
+import Nav from "../components/Nav";
 import CartList from "../components/cart/CartList";
 import OrderBtn from "../components/cart/OrderBtn";
 
@@ -19,7 +19,7 @@ const Cart = () => {
     return(
         <>
         <CartBox>
-        <Navbar>장바구니</Navbar>
+        <Nav>장바구니</Nav>
         <hr style={{border:'solid 1.5px #F0F1F5'}}/>
         <CartList/>
         <OrderBtn/>
