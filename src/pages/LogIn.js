@@ -4,13 +4,34 @@ import UserIcon from "../assets/idicon.png";
 import PasswordIcon  from "../assets/pwicon.png"; 
 import Logo from "../assets/logo2.png";
 import Nav from '../components/Nav';
-
+import axios from 'axios';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
+  // const [accessToken, setAccessToken] = useState('');
+  // const [refreshToken, setRefreshToken] = useState('');
 
-  return(
+  const apiUrl = 'https://1d75-222-233-66-35.ngrok-free.app'; 
+  // Axios 인스턴스 생성
+  const api = axios.create({
+    timeout: 10000, // 타임아웃 설정
+  });
+
+  const handleLogin = () => {
+    api.post(apiUrl + '/api/v1/auth/login', {
+      password: pw,
+      email: email
+    }).then((response) => {
+      // const responseData = response.data;
+      // setAccessToken(responseData.accessToken);
+      // setRefreshToken(responseData.refreshToken);
+      alert('로그인 성공');
+    }).catch((error) => {
+      alert('로그인 실패');
+    });
+  };
+return(
     <section>
       <LoginPageContainer>
         <LoginForm>
@@ -43,9 +64,9 @@ const Login = () => {
             </InputBox>
 
             <div>
-                <SubmitButton>
-                    로그인
-                </SubmitButton>
+              <SubmitButton onClick={handleLogin}>
+                 로그인
+              </SubmitButton>
             </div>
             <p>
                 <SignUpButton
