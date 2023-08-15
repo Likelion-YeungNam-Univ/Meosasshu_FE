@@ -12,7 +12,7 @@ const Login = () => {
   // const [accessToken, setAccessToken] = useState('');
   // const [refreshToken, setRefreshToken] = useState('');
 
-  const apiUrl = 'https://1d75-222-233-66-35.ngrok-free.app'; 
+  const apiUrl = 'https://6c00-141-164-59-170.ngrok-free.app'; 
   // Axios 인스턴스 생성
   const api = axios.create({
     timeout: 10000, // 타임아웃 설정

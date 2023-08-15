@@ -80,7 +80,7 @@ const SignUp = () => {
 const birthday = `${year}-${month}-${day}`;
 
 
-const apiUrl = 'https://1d75-222-233-66-35.ngrok-free.app';
+const apiUrl = 'https://6c00-141-164-59-170.ngrok-free.app';
 
 const onSubmit = () => {
     axios
