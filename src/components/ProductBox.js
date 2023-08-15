@@ -23,8 +23,8 @@ const ProductContainer = styled.div`
 `;
 
 const ItemImage = styled.img`
-  width: 180px;
-  height: 180px;
+  width: 165px;
+  height: 165px;
   object-fit: cover;
   margin-bottom: 5px;
   border-radius: 2px;
