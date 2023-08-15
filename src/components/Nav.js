@@ -18,15 +18,15 @@ const BackButton = styled(Link)`
   left: 5px;  // 왼쪽으로 부터의 거리
 `;
 
-const Nav = (props) => {
+const Nav = ({ backTo = '/', children }) => {
   return (
     <NavbarContainer>
-       <BackButton to={props.backTo}>
+       <BackButton to={backTo}>
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
           <path d="M16 7H3.83L9.42 1.41L8 0L0 8L8 16L9.41 14.59L3.83 9H16V7Z" fill="black"/>
         </svg>
       </BackButton>
-      <span style={{ fontSize: '20px', fontWeight: '600' }}>{props.children}</span>
+      <span style={{ fontSize: '20px', fontWeight: '600' }}>{children}</span>
     </NavbarContainer>
   );
 };
