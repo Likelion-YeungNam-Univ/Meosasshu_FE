@@ -1,5 +1,6 @@
 import React from "react";
 import {BrowserRouter, Routes, Route} from "react-router-dom";
+import "./App.css"
 import Cart from "./pages/Cart";
 import LogIn from "./pages/LogIn";
 import Main from "./pages/Main";
@@ -8,9 +9,10 @@ import Review from "./pages/Review";
 import SignUp from "./pages/SignUp";
 import Payment from "./pages/Payment";
 import Profile from "./pages/Profile";
-import "./App.css"
 import ProductList from "./pages/ProductList";
-
+import EditMember from "./pages/EditMember";
+import OrderInquiry from "./pages/OrderInquiry";
+import CancelHistory from "./pages/CancelHistory";
 const App = () =>{
   return(
     <BrowserRouter>
@@ -24,6 +26,9 @@ const App = () =>{
       <Route path='/payment' element={<Payment />}></Route>
       <Route path='/profile' element={<Profile />}></Route>
       <Route path='/productlist' element={<ProductList />}></Route>
+      <Route path='/editmember' element={<EditMember />}></Route>
+      <Route path='/orderinquiry' element={<OrderInquiry />}></Route>
+      <Route path='/cancelhistory' element={<CancelHistory />}></Route>
     </Routes>
     </BrowserRouter>
   )
