@@ -276,11 +276,7 @@ margin-bottom: 20px;
     width: 83vw;
     height: 6vh;
 }`;
-const Logo= styled.img`
-display: block;
-margin: auto;
-margin-top:20px;
-`;
+
 const ConfirmPwMsg= styled.p`
 color: #EB0000;
 margin-top: 0px;
