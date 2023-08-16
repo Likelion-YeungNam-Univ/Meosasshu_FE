@@ -10,64 +10,76 @@ const Payment = ({ totalPayment, totalProductPrice }) => {
   };
 
   return (
-    <Container>
-      <Form>
-        <Nav>주문/결제</Nav>
-        <Heading>주문상품 총 1개</Heading>
-        <Section>
-          <Information>
-            <AddressBox>
+    <section>
+      <Container>
+        <Form>
+          <Nav>주문/결제</Nav>
+          <Heading>
+            <Title>주문상품 총 1개</Title>
+          </Heading>
+          <Section>
+            <Information>
               <Title>배송지 정보</Title>
-              <Link href='/AddressChange'>변경하기</Link>
-            </AddressBox>
-            <Address>경북 경산시 대학교280<br/>영남대학교</Address>
-            <Select value={selectedOption} onChange={handleOptionChange}>
-              <option value="request">배송 시 요청사항을 선택해주세요</option>
-              <option value="security">부재 시 경비실에 맡겨주세요</option>
-              <option value="parcel">부재 시 택배함에 넣어주세요</option>
-              <option value="contact">배송 전 연락 바랍니다</option>
-            </Select>
-          </Information>
-        </Section>
-        <Total>
-          <FlexContainer>
-            <Span>총 결제 금액</Span>
-            <Span>{totalPayment}</Span>
-          </FlexContainer>
-        </Total>
-        <Price>
-          <FlexContainer>
-            <Span>총 상품금액</Span>
-            <Span>{totalProductPrice}</Span>
-          </FlexContainer>
-        </Price>
-        <Price>
-          <FlexContainer>
-            <Span>상품할인</Span>
-            <Span>상품할인 금액</Span>
-          </FlexContainer>
-        </Price>
-        <Price>
-          <FlexContainer>
-            <Span>배송비</Span>
-            <Span>0원</Span>
-          </FlexContainer>
-        </Price>
-        <DetailContainer>
-          <Method>
-            결제 방법
-            <NaverPay>네이버 페이</NaverPay>
-          </Method>
-          <Button>구매</Button>
-        </DetailContainer>
-      </Form>
-    </Container>
+              <Link href='/AddressChange'> 변경하기 </Link>
+              <Address>경북 경산시 대학교280<br/>영남대학교</Address>
+              <Select selectedOption={selectedOption} onChange={handleOptionChange}>
+                <Option value="request">배송 시 요청사항을 선택해주세요</Option>
+                <Option value="security">부재 시 경비실에 맡겨주세요</Option>
+                <Option value="parcel">부재 시 택배함에 넣어주세요</Option>
+                <Option value="contact">배송 전 연락 바랍니다</Option>
+              </Select>
+            </Information>
+          </Section>
+          <Total>
+            <FlexContainer>
+              <Span>총 결제 금액</Span>
+              <Span>{totalPayment}</Span>
+            </FlexContainer>
+          </Total>
+          <Price>
+            <FlexContainer>
+              <Span>총 상품금액</Span>
+              <Span>{totalProductPrice}</Span>
+            </FlexContainer>
+          </Price>
+          <Price>
+            <FlexContainer>
+              <Span>상품할인</Span>
+              <Span>상품할인 금액</Span>
+            </FlexContainer>
+          </Price>
+          <Price>
+            <FlexContainer>
+              <Span>배송비</Span>
+              <Span>0원</Span>
+            </FlexContainer>
+          </Price>
+          <DetailContainer>
+            <Method>
+              결제 방법
+              <NaverPay>네이버 페이</NaverPay>
+            </Method>
+            <Button>구매</Button>
+          </DetailContainer>
+        </Form>
+      </Container>
+    </section>
   );
 };
 
 export default Payment;
 
-const Container = styled.section`
+const FlexContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const Span = styled.span`
+  margin-right:20px;
+`;
+
+const Container = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,6 +96,7 @@ const Form = styled.div`
 
 const Heading = styled.div`
   justify-content: flex-start;
+  width: auto;
   color: #000;
   font-family: Inter;
   font-size: 20px;
@@ -91,6 +104,13 @@ const Heading = styled.div`
   line-height: normal;
   padding: 20px 0px 20px 10px;
   margin-top: 20px;
+`;
+
+const Title = styled.div`
+  color: #000;
+  font-family: Inter;
+  font-size: 25px;
+  font-weight: 600;
 `;
 
 const Section = styled.div`
@@ -104,34 +124,6 @@ const Section = styled.div`
   margin: 10px 0;
 `;
 
-const Information = styled.div`
-  justify-content: flex-start;
-  padding: 25px 0px 20px 10px;
-  color: #000;
-  font-family: Inter;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: normal;
-  margin-top: 20px;
-  border-top: 1px solid #D8D8D8;
-  text-align: left;
-`;
-
-const AddressBox = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  text-align: left;
-  margin-bottom: 10px;
-`;
-
-const Title = styled.div`
-  color: #000;
-  font-family: Inter;
-  font-size: 20px;
-  font-weight: 600;
-`;
-
 const Link = styled.a`
   color: #355796;
   font-family: Inter;
@@ -139,15 +131,17 @@ const Link = styled.a`
   font-weight: 600;
   line-height: normal;
   text-decoration-line: none;
+  display: flex; 
+  justify-content: flex-end; 
 `;
-
-const Address = styled.div`
+const Total = styled.div`
   color: #000;
   font-family: Inter;
-  font-size: 13px;
-  font-weight: 400;
+  font-size: 20px;
+  font-weight: 600;
   line-height: normal;
-  margin: 15px 0;
+  padding: 20px 0px 20px 10px;
+  border-bottom: 1px solid #D8D8D8;
 `;
 
 const Select = styled.select`
@@ -160,22 +154,7 @@ const Select = styled.select`
   font-size: 16px;
   font-weight: 400;
   outline: none;
-`;
 
-const Total = styled.div`
-  color: #000;
-  font-family: Inter;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: normal;
-  padding: 20px 0px 20px 10px;
-  border-bottom: 1px solid #D8D8D8;
-`;
-
-const FlexContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
 `;
 
 const Price = styled.div`
@@ -185,18 +164,19 @@ const Price = styled.div`
   font-weight: 500;
   line-height: normal;
   padding: 20px 0px 10px 10px;
+  
 `;
 
 const DetailContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-top: 20px;
-  margin-bottom: 10px;
+  margin-bottom:10px;
 `;
 
 const Method = styled.div`
-  display: flex;
-  align-items: flex-start;
+  display: flex; 
+  align-items: flex-start; 
   padding: 25px 0px 20px 10px;
   color: #000;
   font-family: Inter;
@@ -206,17 +186,33 @@ const Method = styled.div`
   margin-top: 20px;
   border-top: 1px solid #D8D8D8;
   text-align: left;
+  ${Link} {
+    text-align: left;
+  }
 `;
-
-const NaverPay = styled.div`
-  color: rgba(51, 51, 51, 0.67);
+const Information = styled.div`
+  justify-content: flex-start;
+  padding: 25px 0px 20px 10px;
+  color: #000;
   font-family: Inter;
-  font-size: 15px;
-  font-style: normal;
+  font-size: 20px;
   font-weight: 600;
   line-height: normal;
-  margin-left: 10px;
-  margin-top: 5px;
+  margin-top: 20px;
+  border-top: 1px solid #D8D8D8;
+  text-align: left;
+  ${Link} {
+    text-align: left;
+  }
+`;
+
+const Address = styled.div`
+  color: #000;
+  font-family: Inter;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: normal;
+  margin: 15px 0;
 `;
 
 const Button = styled.button`
@@ -249,3 +245,27 @@ const Button = styled.button`
   }
 }`;
 
+const Option = styled.option`
+  padding: 10px;
+  color: ${props => (props.isSelected ? 'white' : '#000')};
+  font-family: Inter;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+  &:hover {
+    background: #ff00ff;
+    color: #fff;
+  }
+`;
+
+const NaverPay = styled.div`
+    color: rgba(51, 51, 51, 0.67);
+    font-family: Inter;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-left:10px;
+    margin-top:5px;
+`;
