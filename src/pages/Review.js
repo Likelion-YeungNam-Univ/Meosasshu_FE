@@ -3,11 +3,17 @@ import Nav from "../components/Nav";
 import styled from "styled-components";
 import axios from "axios";
 
-const URL = process.env.REACT_APP_API_URL;
-const Url2 = 'https://6c00-141-164-59-170.ngrok-free.app'
+const Url2 = 'https://6503-158-247-236-58.ngrok-free.app';
+
 const Review = () => {
     const [selectedKeywords, setSelectedKeywords] = useState([]);
     const [reviewText, setReviewText] = useState('');
+
+    const keywordMap = {
+        '가성비': '가성비가 좋아요.',
+        '품질': '품질이 우수해요.',
+        '배송': '배송이 빨라요.'
+    };
 
     const toggleKeyword = (keyword) => {
         if (selectedKeywords.includes(keyword)) {
@@ -17,30 +23,38 @@ const Review = () => {
         }
     };
 
-    const orderNumber = 1;
-    const productNumber = 1;
-
-    const getReviewForm = async (orderNumber, productNumber) => {
+    const submitReview = async () => {
         try {
+            const mappedKeywords = selectedKeywords.map(keyword => keywordMap[keyword]);
+            
+            const body = {
+                comment: reviewText,
+                keywords: mappedKeywords
+            };
+
             const accessToken = localStorage.getItem('accessToken');
             const refreshToken = localStorage.getItem('refreshToken');
-    
-            const response = await axios.get(`${Url2}/api/v1/orders/${orderNumber}/products/${productNumber}/review-form`, {
+
+            const response = await axios.post(`${Url2}/api/v1/products/${productNumber}/reviews`, body, {
                 headers: {
-                    'Authorization': `Bearer ${accessToken}`,
-                    'Refresh-Token': refreshToken
+                    "accessToken": accessToken,
+                    "refreshToken": refreshToken
                 }
             });
-    
+
             console.log(response.data); // 콘솔로 결과 확인
+
         } catch (error) {
-            console.error("Error fetching review form:", error);
+            console.error("Error submitting review:", error);
         }
     };
 
-    useEffect(() => {
-        getReviewForm(orderNumber, productNumber);
-    }, []);
+    const orderNumber = 1;
+    const productNumber = 1;
+
+    // useEffect(() => {
+    //     getReviewForm(orderNumber, productNumber);
+    // }, []);
 
     return (
         <Container>
@@ -91,6 +105,7 @@ const Review = () => {
                 <SubmitButton 
                     type="button" 
                     disabled={reviewText.length < 10}
+                    onClick={submitReview}
                 >
                     등록하기
                 </SubmitButton>
