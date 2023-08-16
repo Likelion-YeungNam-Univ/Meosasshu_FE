@@ -35,47 +35,35 @@ const Search = () => {
   };
 
   return (
-    <div>
-      <SearchContainer>
-        <input
-          type="text"
-          placeholder=" 찾으시는 물건이 무엇인가요?"
-        />
-        <IconContainer>
-          <SearchIcon onClick={handleSearch} style={{ cursor: 'pointer' }} />
-          <MicIcon onClick={handleMicClick} style={{ cursor: 'pointer' }} />
-        </IconContainer>
-      </SearchContainer>
-    </div>
+        <div style={{display:'flex',marginTop:'20px', alignItems:'center'}}>
+          <label style={{position:'relative'}}>
+            <SearchBar
+              type="text"
+              placeholder=" 찾으시는 물건이 무엇인가요?"/>
+            <SearchBtn><SearchIcon onClick={handleSearch} style={{ cursor: 'pointer',color:'#929294'}} /></SearchBtn>
+          </label>
+          <MicIcon onClick={handleMicClick} style={{ cursor: 'pointer'}} />
+        </div>
   );
 };
 
-const SearchContainer = styled.div`
-  display: flex;
-  align-items: center;
-  width: 300px;
-  border-radius: 20px;
-  margin-left: 10px;
-
-  input {
-    width: 270px;
-    height: 35px;
-    border-radius: 20px;
-    background-color: #F0F1F5;
-    border: none; /* 테두리 없애기 */
-    padding: 0 10px; /* 내용과의 간격을 위해 padding 추가 */
-    padding-right: 35px; /* 돋보기 아이콘을 위한 오른쪽 패딩 추가 */
-  }
+const SearchBar =styled.input`
+margin:auto; 
+width:270px;
+height:35px;
+border:none;
+background:#F0F1F5;
+border-radius:2em;
+padding-left:10px;
+padding-right:30px;
 `;
 
-const IconContainer = styled.div`
-  display: flex;
-  position: absolute;
-  right: 10px; /* 아이콘 컨테이너를 오른쪽에 위치 */
-  align-items: center;
-  height: 100%; /* 아이콘 컨테이너의 높이를 input에 맞게 조정 */
+const SearchBtn =styled.button`
+position:absolute; 
+left:275px;
+top: 3px;
+border:none; 
+background: transparent;
 `;
-
-
 
 export default Search;
