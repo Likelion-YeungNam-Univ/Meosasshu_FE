@@ -1,20 +1,25 @@
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import styled from "styled-components";
+import Nav from "../components/Nav";
+import { useNavigate } from "react-router-dom";
 
 const OrderContainer = styled.div`
   font-family: 'Noto Sans KR', sans-serif;
-  margin-bottom: 20px;
+  margin: 25px 0;
   border: 1px solid #e0e0e0;
   border-radius: 5px;
 `;
 
 const OrderHeader = styled.div`
+  color: #929294;
+  font-size: 25px;
+  font-weight: 600;
   display: flex;
   justify-content: space-between;
-  padding: 10px 15px;
-  background-color: #f7f7f7;
+  padding: 12px 18px;
   border-bottom: 1px solid #e0e0e0;
+  font-size: 16px;
 `;
 
 const ProductList = styled.div``;
@@ -22,7 +27,7 @@ const ProductList = styled.div``;
 const ProductItem = styled.div`
   display: flex;
   align-items: center;
-  padding: 10px 15px;
+  padding: 15px 18px;
   border-bottom: 1px solid #e0e0e0;
 
   &:last-child {
@@ -31,32 +36,96 @@ const ProductItem = styled.div`
 `;
 
 const ProductImage = styled.img`
-  width: 50px;
-  height: 50px;
-  margin-right: 15px;
+  width: 150px;
+  height: 150px;
+  border-radius: 3px;
+  margin-right: 20px;
 `;
 
 const ProductDetails = styled.div`
+  margin-left:20px;
   flex: 1;
-  font-size: 14px;
+  font-size: 16px;
 `;
 
-const OrderStatus = styled.span`
-  font-weight: bold;
-  color: ${props => (props.status === "CANCEL" ? "red" : "green")};
+const ProductContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
 `;
+
+const TopRow = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: 10px;
+  align-self: center;
+`;
+
+
+const ActionButton = styled.button`
+  flex: 1;
+  font-size:15px;
+  font-weight:500;
+  margin-top: 20px;
+  margin-right: 10px;
+  padding: 5px 0;
+  border: 1px solid #DEDEDE;
+  width: 156px;
+  height: 52px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #FFF;
+  text-align: center;
+
+  &:hover {
+    background-color: #e0e0e0;
+  }
+
+  &:last-child {
+    margin-right: 0;
+  }
+`;
+
+const BrandText = styled.p`
+  font-size: 15px;
+  font-weight: 400;
+  margin-bottom: 5px;  // 이 값을 조절하여 브랜드 텍스트 아래 간격 조절
+`;
+
+const ProductNameText = styled.p`
+  font-size: 18px;
+  font-weight: 600;
+`;
+
+const QuantityText = styled.p`
+`;
+
+const PriceText = styled.p`
+
+`;
+
 
 const OrderInquiry = () => {
+  const handleReviewButtonClick = (productId, orderId) => {
+    navigate('/review', { state: { productId, orderId } });
+  };  
+  
   const [data, setData] = useState(null);
   const URL = 'https://6503-158-247-236-58.ngrok-free.app';
-
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchOrders = async () => {
       const accessToken = localStorage.getItem('accessToken');
       const refreshToken = localStorage.getItem('refreshToken');
-      
+
       try {
-        const response = await axios.get(URL +'/api/v1/orders', {
+        const response = await axios.get(URL + '/api/v1/orders', {
           headers: {
             'ngrok-skip-browser-warning': '69420',
             "withCredential": "true",
@@ -65,8 +134,9 @@ const OrderInquiry = () => {
             "refreshToken": refreshToken
           }
         });
-        
+
         setData(response.data);
+        console.log(response);
       } catch (error) {
         console.error("API 요청 중 오류 발생:", error);
       }
@@ -81,24 +151,34 @@ const OrderInquiry = () => {
 
   return (
     <div>
+      <Nav backTo="/profile">주문 조회</Nav>
       {data.content.map(order => (
         <OrderContainer key={order.orderId}>
           <OrderHeader>
-            <span>주문 날짜: {new Date(order.orderDate).toLocaleDateString()}</span>
-            <OrderStatus status={order.status}>
-              {order.status === "CANCEL" ? "취소됨" : "진행중"}
-            </OrderStatus>
+          <span>{new Date(...order.orderDate).toLocaleDateString()}</span>
           </OrderHeader>
           <ProductList>
             {order.orderProducts.map(product => (
               <ProductItem key={product.productId}>
-                <ProductImage src={product.imageUrl} alt={product.productName} />
-                <ProductDetails>
-                  <h5>{product.productName}</h5>
-                  <p>브랜드: {product.brand}</p>
-                  <p>수량: {product.quantity}</p>
-                  <p>총 가격: ₩{product.totalPrice.toFixed(2)}</p>
-                </ProductDetails>
+                <ProductContent>
+                  <TopRow>
+                    <ProductImage src={product.imageUrl} alt={product.productName} />
+                    <ProductDetails>
+                     <BrandText>{product.brand}</BrandText>
+                    <div>
+                      <ProductNameText>{product.productName}</ProductNameText>
+                      <QuantityText>수량: {product.quantity}</QuantityText>
+                    </div>
+                    <PriceText>{product.totalPrice.toFixed(2)}원</PriceText>
+                  </ProductDetails>
+                  </TopRow>
+                  <ButtonContainer>
+                    <ActionButton>배송조회</ActionButton>
+                    <ActionButton style={{border: '1px solid #BCC454', color:'#BCC454'}}onClick={() => handleReviewButtonClick(product.productId, order.orderId)}>
+                      리뷰 작성하기
+                    </ActionButton>
+                  </ButtonContainer>
+                </ProductContent>
               </ProductItem>
             ))}
           </ProductList>
