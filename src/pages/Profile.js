@@ -9,6 +9,7 @@ import Logout from "../assets/Logout.png"
 import { useNavigate } from 'react-router-dom'; 
 import TapBar from "../components/TapBar";
 import axios from "axios";
+import ListenPopUp from "./ListenPopUp";
 
 const Profile = () => {
   const navigate = useNavigate(); 
@@ -30,6 +31,7 @@ const Profile = () => {
       console.error("로그아웃 실패:", error);
     }
   };
+  const [showPopUp, setShowPopUp] = useState(false);
   return (
     <>
       <Header>내 정보</Header>
@@ -63,7 +65,11 @@ const Profile = () => {
         </ContentWrapper>
 
         <Line />
-        <TapBar />
+        
+        <TapBar onMicClick={() => setShowPopUp(true)} />
+
+        {showPopUp && <ListenPopUp onClose={() => setShowPopUp(false)} />}
+
 
         {showLogoutPopup && (
           <Popup>
