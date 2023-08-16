@@ -3,7 +3,8 @@ import TapBar from "../components/TapBar";
 import ProductBox from '../components/ProductBox';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from "axios";
 
 const ProductListBox = styled.div`
 @media only screen and (min-width: 430px) {
@@ -14,7 +15,8 @@ const ProductListBox = styled.div`
 @media only screen and (max-width: 430px) {
 max-width: auto;
 margin: auto;
-}`;
+}
+`;
 
 const ProductBlock = styled.div`
 display:flex;
@@ -45,9 +47,30 @@ background: transparent;
 const ProductList = () => {
 const [Search,setSearch]=useState(true)
 
-const onclick = () => {
-    console.log("클릭")
+// const onclick = () => {
+//     console.log("클릭")
+// }
+
+const apiUrl = 'https://6503-158-247-236-58.ngrok-free.app';
+
+const data = async () => {
+    try{
+        const res = await axios.get(apiUrl + '/api/v1/products',
+        {
+            params: {
+               page: 0
+            },
+        },{ withCredentials: true,'Content-Type': `application/json`,'ngrok-skip-browser-warning': '69420', });
+    console.log(res.data);
+    }
+    catch (error) {
+        console.error('Error', error);
+      }
 }
+
+useEffect(() => {
+    data();
+  }, []);
 
     return (
         <>
