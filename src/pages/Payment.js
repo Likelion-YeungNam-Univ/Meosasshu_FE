@@ -1,13 +1,43 @@
 import styled from 'styled-components';
 import Nav from '../components/Nav';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
-const Payment = ({ totalPayment, totalProductPrice }) => {
+const Payment = () => {
   const [selectedOption, setSelectedOption] = useState('');
+  const [productData, setProductData] = useState({});
 
   const handleOptionChange = event => {
     setSelectedOption(event.target.value);
   };
+
+  const apiUrl = 'https://6503-158-247-236-58.ngrok-free.app';
+
+  useEffect(() => {
+      const send = async () => {
+          try {
+              const accessToken = localStorage.getItem('accessToken');
+              const refreshToken = localStorage.getItem('refreshToken');
+              const res = await axios.get(apiUrl + '/api/v1/products/1/order-form?quantity=1', {
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'ngrok-skip-browser-warning': '69420',
+                      'accessToken':accessToken,
+                      'refreshToken':refreshToken,
+                  },
+              });
+              console.log('AccessToken:', accessToken);
+              console.log('RefreshToken:', refreshToken);
+              console.log(res.data); 
+              console.log(res.data.orderProducts); 
+              setProductData(res.data); 
+          } catch (error) {
+              console.error('Error fetching data:', error);
+          }
+      };
+
+      send(); // 초기 렌더링 시 데이터 가져오기 호출
+  }, []);
 
   return (
     <section>
@@ -15,7 +45,7 @@ const Payment = ({ totalPayment, totalProductPrice }) => {
         <Form>
           <Nav>주문/결제</Nav>
           <Heading>
-            <Title>주문상품 총 1개</Title>
+            <Title>주문상품 총 {productData.orderProducts ? productData.orderProducts[0].quantity : 0}개</Title>
           </Heading>
           <Section>
             <Information>
@@ -33,19 +63,19 @@ const Payment = ({ totalPayment, totalProductPrice }) => {
           <Total>
             <FlexContainer>
               <Span>총 결제 금액</Span>
-              <Span>{totalPayment}</Span>
+              <Span>{productData.totalPrice}</Span>
             </FlexContainer>
           </Total>
           <Price>
             <FlexContainer>
               <Span>총 상품금액</Span>
-              <Span>{totalProductPrice}</Span>
+              <Span>{productData.totalPrice/2}</Span>
             </FlexContainer>
           </Price>
           <Price>
             <FlexContainer>
               <Span>상품할인</Span>
-              <Span>상품할인 금액</Span>
+              <Span>50%SALE</Span>
             </FlexContainer>
           </Price>
           <Price>
@@ -133,6 +163,7 @@ const Link = styled.a`
   text-decoration-line: none;
   display: flex; 
   justify-content: flex-end; 
+  margin-right:20px;
 `;
 const Total = styled.div`
   color: #000;
@@ -154,6 +185,7 @@ const Select = styled.select`
   font-size: 16px;
   font-weight: 400;
   outline: none;
+  margin-left:15px;
 
 `;
 
@@ -186,6 +218,7 @@ const Method = styled.div`
   margin-top: 20px;
   border-top: 1px solid #D8D8D8;
   text-align: left;
+  margin-bottom:20px;
   ${Link} {
     text-align: left;
   }
