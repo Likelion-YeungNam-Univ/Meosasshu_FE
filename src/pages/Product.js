@@ -51,7 +51,7 @@ const Product = () => {
           <PriceContainer>
           <PriceInfo>
               <ItemPrice>{productData.price}</ItemPrice>
-              <OriginalPrice>{productData.price/2}</OriginalPrice>
+              <OriginalPrice>{productData.price*2}</OriginalPrice>
             </PriceInfo>
             <SaleText>{productData.salePercentage} 50% SALE</SaleText>
           </PriceContainer>
