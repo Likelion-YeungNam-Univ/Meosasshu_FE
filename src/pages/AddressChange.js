@@ -1,271 +1,196 @@
+
 import styled from 'styled-components';
-import Nav from '../components/Nav';
-import React, { useState } from 'react';
+import Address from '../components/Address';
 
-const Payment = ({ totalPayment, totalProductPrice }) => {
-  const [selectedOption, setSelectedOption] = useState('');
+import { Link } from 'react-router-dom';
+import BackIcon from '../assets/arrow.png';
 
-  const handleOptionChange = event => {
-    setSelectedOption(event.target.value);
-  };
-
-  return (
-    <section>
-      <Container>
-        <Form>
-          <Nav>주문/결제</Nav>
-          <Heading>
-            <Title>주문상품 총 1개</Title>
-          </Heading>
-          <Section>
-            <Information>
-              <Title>배송지 정보</Title>
-              <Link href='/AddressChange'> 변경하기 </Link>
-              <Address>경북 경산시 대학교280<br/>영남대학교</Address>
-              <Select selectedOption={selectedOption} onChange={handleOptionChange}>
-                <Option value="request">배송 시 요청사항을 선택해주세요</Option>
-                <Option value="security">부재 시 경비실에 맡겨주세요</Option>
-                <Option value="parcel">부재 시 택배함에 넣어주세요</Option>
-                <Option value="contact">배송 전 연락 바랍니다</Option>
-              </Select>
-            </Information>
-          </Section>
-          <Total>
-            <FlexContainer>
-              <Span>총 결제 금액</Span>
-              <Span>{totalPayment}</Span>
-            </FlexContainer>
-          </Total>
-          <Price>
-            <FlexContainer>
-              <Span>총 상품금액</Span>
-              <Span>{totalProductPrice}</Span>
-            </FlexContainer>
-          </Price>
-          <Price>
-            <FlexContainer>
-              <Span>상품할인</Span>
-              <Span>상품할인 금액</Span>
-            </FlexContainer>
-          </Price>
-          <Price>
-            <FlexContainer>
-              <Span>배송비</Span>
-              <Span>0원</Span>
-            </FlexContainer>
-          </Price>
-          <DetailContainer>
-            <Method>
-              결제 방법
-              <NaverPay>네이버 페이</NaverPay>
-            </Method>
-            <Button>구매</Button>
-          </DetailContainer>
-        </Form>
-      </Container>
-    </section>
-  );
-};
-
-export default Payment;
-
-const FlexContainer = styled.div`
+const NavbarContainer = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  align-items: center;
+  padding: 1px;
 `;
 
-const Span = styled.span`
-  margin-right:20px;
-`;
-
-const Container = styled.div`
+const BackButton = styled(Link)`
+  text-decoration: none;
+  color: black;
+  padding: 5px 3px ;
+  border: 1px solid #fff;
+  background-image: url(${BackIcon});
+  background-size: cover;
+  width: 20px;
+  height: 20px;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left:10px;
 `;
 
-const Form = styled.div`
-  border: 1px solid #ccc;
-  width: 365px;
 
-  @media (max-width: 768px) {
-    width: 100%;
-  }
-`;
-
-const Heading = styled.div`
-  justify-content: flex-start;
-  width: auto;
+const CenteredContent = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 1; 
+  margin-right:25px;
   color: #000;
   font-family: Inter;
   font-size: 20px;
+  font-style: normal;
   font-weight: 600;
   line-height: normal;
-  padding: 20px 0px 20px 10px;
-  margin-top: 20px;
 `;
 
-const Title = styled.div`
+
+const LoginPageContainer = styled.div`
+    display: flex;
+    justify-content: center;
+    align-items: center;
+`;
+
+const LoginForm = styled.div`
+  border: 1px solid #ccc;
+  width: 365px; 
+  
+  @media (max-width: 768px) {
+    width: 100%;
+`;
+
+
+const Ab = styled.div`
+    justify-content: flex-start;
+    width: auto;
+    color: #000;
+    font-family: Inter;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    padding: 20px 0px 20px 10px;
+    margin-top:20px;
+`;
+
+const Article = styled.div`
   color: #000;
   font-family: Inter;
   font-size: 25px;
+  font-style: normal;
   font-weight: 600;
+  line-height: normal;
+
 `;
 
-const Section = styled.div`
-  justify-content: flex-start;
-  border-bottom: 1px solid #D8D8D8;
-  color: #000;
-  font-family: Inter;
+const PaymentMethod = styled.div`
+  padding: 25px 0px 20px 2px;
   font-size: 20px;
+  font-style: normal;
   font-weight: 600;
   line-height: normal;
-  margin: 10px 0;
-`;
+  margin-top: 20px;
+  border-top: 1px solid #D8D8D8;
+  text-align: center;
 
-const Link = styled.a`
-  color: #355796;
-  font-family: Inter;
-  font-size: 16px;
-  font-weight: 600;
-  line-height: normal;
-  text-decoration-line: none;
   display: flex; 
-  justify-content: flex-end; 
-`;
-const Total = styled.div`
-  color: #000;
-  font-family: Inter;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: normal;
-  padding: 20px 0px 20px 10px;
-  border-bottom: 1px solid #D8D8D8;
-`;
-
-const Select = styled.select`
-  position: relative;
-  width: 90%;
-  border: 1px solid #D8D8D8;
-  background-color: white;
-  color: #929294;
-  font-family: Inter;
-  font-size: 16px;
-  font-weight: 400;
-  outline: none;
-
-`;
-
-const Price = styled.div`
-  color: #929294;
-  font-family: Inter;
-  font-size: 15px;
-  font-weight: 500;
-  line-height: normal;
-  padding: 20px 0px 10px 10px;
+  align-items: center; 
+  justify-content: center; 
+  padding-bottom:180px
   
 `;
 
-const DetailContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-top: 20px;
-  margin-bottom:10px;
+const PostcodeContainer = styled.div`
+  margin-top:35px;
+  
 `;
 
-const Method = styled.div`
-  display: flex; 
-  align-items: flex-start; 
-  padding: 25px 0px 20px 10px;
-  color: #000;
-  font-family: Inter;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: normal;
-  margin-top: 20px;
-  border-top: 1px solid #D8D8D8;
-  text-align: left;
-  ${Link} {
-    text-align: left;
-  }
-`;
-const Information = styled.div`
-  justify-content: flex-start;
-  padding: 25px 0px 20px 10px;
-  color: #000;
-  font-family: Inter;
-  font-size: 20px;
-  font-weight: 600;
-  line-height: normal;
-  margin-top: 20px;
-  border-top: 1px solid #D8D8D8;
-  text-align: left;
-  ${Link} {
-    text-align: left;
-  }
-`;
 
-const Address = styled.div`
-  color: #000;
-  font-family: Inter;
-  font-size: 13px;
-  font-weight: 400;
-  line-height: normal;
-  margin: 15px 0;
-`;
-
-const Button = styled.button`
+const BuyButton = styled.button`
   background-color: #929294;
+  color: white;
   font-size: 20px;
-  margin-bottom: 5px;
   border: none;
   border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+
+  width: 95%;
+  padding-top: 5px;
+  padding-bottom:5px;
+  margin-left:15px;
+ 
+  color: #FFF;
+  font-family: Inter;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 600;
+  margin-bottom:10px;
+  margin-top:50px;
+
+  &: hover {
+    background-color:#BCC454;
+  }
+`;
+
+const Myaddress = styled.button`
+  background-color: #929294;
+  border: none;
+  border-radius: 8px;
   cursor: pointer;
   display: flex;
   justify-content: center;
   align-items: center; 
-  width: 95%;
-  padding: 5px 0; 
-  margin: 0 auto; 
+  width: 150px;
+  padding: 5px; 
+  margin-left: auto; 
+  margin-top: 25px;
   color: #FFF;
   font-family: Inter;
-  font-size: 25px;
+  font-size: 16px;
   font-weight: 600;
   line-height: normal;
-  margin-top: 20px; 
-  background-color: #929294;
-  border: none;
-  border-radius: 12px;
-  cursor: pointer;
-  
-
   &:hover {
     background-color: #BCC454;
   }
-}`;
-
-const Option = styled.option`
-  padding: 10px;
-  color: ${props => (props.isSelected ? 'white' : '#000')};
-  font-family: Inter;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: normal;
-  cursor: pointer;
-  &:hover {
-    background: #ff00ff;
-    color: #fff;
-  }
 `;
 
-const NaverPay = styled.div`
-    color: rgba(51, 51, 51, 0.67);
-    font-family: Inter;
-    font-size: 15px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    margin-left:10px;
-    margin-top:5px;
-`;
+
+const AddressChange = () => {
+
+
+  return (
+    <section>
+      <LoginPageContainer>
+        <LoginForm>
+         <NavbarContainer>
+                <BackButton to="/payment" />
+           <CenteredContent>
+                주소 변경
+           </CenteredContent>
+          </NavbarContainer>
+          <Ab><Article>주소를 입력해 주세요.</Article></Ab>
+          <PaymentMethod>
+            <PostcodeContainer>
+              <Address />
+              <Myaddress>내 주소 불러오기</Myaddress>
+            </PostcodeContainer>
+          </PaymentMethod>
+          <BuyButton>구매</BuyButton>
+        </LoginForm>
+      </LoginPageContainer>
+    </section>
+  );
+};
+
+export default AddressChange;
+
+
+
+
+
+
+
+
+
+
+
