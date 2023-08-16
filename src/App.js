@@ -14,6 +14,7 @@ import EditMember from "./pages/EditMember";
 import OrderInquiry from "./pages/OrderInquiry";
 import CancelHistory from "./pages/CancelHistory";
 import Category from "./pages/Category";
+import AddressChange from "./pages/AddressChange";
 const App = () =>{
   return(
     <BrowserRouter>
@@ -31,6 +32,7 @@ const App = () =>{
       <Route path='/orderinquiry' element={<OrderInquiry />}></Route>
       <Route path='/cancelhistory' element={<CancelHistory />}></Route>
       <Route path='/category' element={<Category />}></Route>
+      <Route path='/AddressChange' element={<AddressChange />}></Route>
     </Routes>
     </BrowserRouter>
   )
