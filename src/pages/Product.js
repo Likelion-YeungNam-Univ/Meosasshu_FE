@@ -1,55 +1,51 @@
 import styled, { css } from 'styled-components';
 import Nav from '../components/Nav';
-import axios from 'axios';
+import axios from 'axios'; // axios를 import 해야 합니다.
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
+const apiUrl = 'https://6503-158-247-236-58.ngrok-free.app';
+
 const Product = () => {
-    const [showContent, setShowContent] = useState(false); 
-    const [summaryContent, setSummaryContent] = useState(''); 
-    const [detailedContent, setDetailedContent] = useState(''); 
-    const [productData, setProductId] = useState(''); 
-    
-    const toggleContent = () => {
-      setShowContent(prevShowContent => !prevShowContent);
-    };
-  
-    useEffect(() => {
-        fetchData(productData); 
-      }, [productData]);
-    
-      const fetchData = async () => {
-        try {
-          const response = await axios.get('https://979c-64-176-225-1.ngrok-free.app'); 
-          const data = response.data; 
-          setSummaryContent(data.summaryContent);
-          setDetailedContent(data.detailedContent);
-          setProductId(data.setProductId);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
-    
+  const [showContent, setShowContent] = useState(false);
+  const [productData, setProductData] = useState([]); 
+ 
+  const toggleContent = () => {
+    setShowContent(prevShowContent => !prevShowContent);
+  };
+
+  useEffect(() => {
+    axios
+      .get(apiUrl + '/api/v1/products') 
+      .then(response => {
+        const responseData = response.data;
+        setProductData(responseData.content);
+      })
+      .catch(error => {
+        alert('정보 가져오기를 실패했습니다.');
+      });
+  }, []);
+
     return (
       <Container>
         <Box>
           <Nav />
           <ProductContainer>
           <ItemImage src="https://via.placeholder.com/500x500" alt="상품 이미지" />
-          <ItemDescription>{productData.name}</ItemDescription>
+          <ItemDescription >{productData.productname}</ItemDescription>
           <PriceContainer>
           <PriceInfo>
               <ItemPrice>{productData.price}</ItemPrice>
-              <OriginalPrice>{productData.originalPrice}</OriginalPrice>
+              <OriginalPrice>{productData.Price}</OriginalPrice>
             </PriceInfo>
-            <SaleText>{productData.salePercentage} 50% SALE</SaleText>
+            <SaleText>50% SALE</SaleText>
           </PriceContainer>
             <GPTBox>
               <Title>chatGPT로 상품 정보를 요약했어요</Title>
-              <Content>{summaryContent}</Content>
+              <Content>{productData.shortDescription}</Content>
               {showContent && (
             <>
-              <Content>{detailedContent}</Content>
+              <Content>{productData.description}</Content>
               <ViewMore onClick={toggleContent}>접기</ViewMore>
             </>
           )}
