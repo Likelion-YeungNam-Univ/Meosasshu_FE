@@ -9,13 +9,10 @@ import axios from 'axios';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
-  // const [accessToken, setAccessToken] = useState('');
-  // const [refreshToken, setRefreshToken] = useState('');
 
-  const apiUrl = 'https://6c00-141-164-59-170.ngrok-free.app'; 
-  // Axios 인스턴스 생성
+  const apiUrl = 'https://6503-158-247-236-58.ngrok-free.app';
   const api = axios.create({
-    timeout: 10000, // 타임아웃 설정
+    timeout: 10000, 
   });
 
   const handleLogin = () => {
@@ -23,15 +20,18 @@ const Login = () => {
       password: pw,
       email: email
     }).then((response) => {
-      // const responseData = response.data;
-      // setAccessToken(responseData.accessToken);
-      // setRefreshToken(responseData.refreshToken);
+      const { accessToken, refreshToken } = response.data; 
+      localStorage.setItem('accessToken', accessToken);
+      localStorage.setItem('refreshToken', refreshToken);
+      console.log('AccessToken:', accessToken);
+      console.log('RefreshToken:', refreshToken);
       alert('로그인 성공');
     }).catch((error) => {
       alert('로그인 실패');
     });
   };
-return(
+
+  return(
     <section>
       <LoginPageContainer>
         <LoginForm>
@@ -47,7 +47,7 @@ return(
                      placeholder="아이디"
                      value={email}
                      onChange={(e) => setEmail(e.target.value)}
-                     required //아무것도 입력되지 않았을 때, 입력하라는 문구
+                     required
                     />
                 </div>
                
@@ -58,7 +58,7 @@ return(
                     placeholder="비밀번호"
                     value={pw}
                     onChange={(e) => setPw(e.target.value)}
-                    required //아무것도 입력되지 않았을 때, 입력하라는 문구
+                    required 
                  />
                 </div>
             </InputBox>
@@ -80,20 +80,18 @@ return(
 )
 }
 
-
 export default Login;
 
 const LoginPageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
 `;
 
 const LoginForm = styled.form`
   padding: 20px;
-  width: 365px; /* 폼의 너비를 더 넓게 조절 */
-  
+  width: 365px; 
+
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -119,7 +117,6 @@ const LogoIconContainer = styled.div`
   margin-bottom: 80px;
   margin-top: 20px;
 `;
-
 
 const Icon = styled.img`
   width: 100%;
@@ -157,18 +154,18 @@ const InputBox = styled.div`
   box-sizing: border-box;
 `;
 
-
 const SubmitButton = styled.button`
   background-color: #BCC454;
-  margin-top: 15px; /* 마진 조절 */
+  margin-top: 15px; 
   color: white;
-  width: 100%; /* 로그인 버튼의 길이를 100%로 설정 */
-  padding: 10px 20px; /* 패딩 조절 */
+  width: 100%; 
+  padding: 10px 20px; 
   font-size: 16px;
   border: 2px solid #BCC454;
   border-radius: 5px;
   cursor: pointer;
 `;
+
 const SignUpButton = styled.a`
   color:#BCC454;
   text-decoration-line: none;
