@@ -31,26 +31,26 @@ const Payment = ({ totalPayment, totalProductPrice }) => {
         </Section>
         <Total>
           <FlexContainer>
-            <Span>총 결제 금액</Span>
-            <Span>{totalPayment}</Span>
+            <span>총 결제 금액</span>
+            <span>{totalPayment}</span>
           </FlexContainer>
         </Total>
         <Price>
           <FlexContainer>
-            <Span>총 상품금액</Span>
-            <Span>{totalProductPrice}</Span>
+            <span>총 상품금액</span>
+            <span>{totalProductPrice}</span>
           </FlexContainer>
         </Price>
         <Price>
           <FlexContainer>
-            <Span>상품할인</Span>
-            <Span>상품할인 금액</Span>
+            <span>상품할인</span>
+            <span>상품할인 금액</span>
           </FlexContainer>
         </Price>
         <Price>
           <FlexContainer>
-            <Span>배송비</Span>
-            <Span>0원</Span>
+            <span>배송비</span>
+            <span>0원</span>
           </FlexContainer>
         </Price>
         <DetailContainer>
