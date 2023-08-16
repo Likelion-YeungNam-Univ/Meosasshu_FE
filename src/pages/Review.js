@@ -1,20 +1,29 @@
 import React, { useState, useEffect } from "react";
 import Nav from "../components/Nav";
 import styled from "styled-components";
-import axios from "axios";
 import { useLocation } from "react-router-dom";
+import axios from "axios";
+import priceicon from "../assets/가성비 아이콘.png";
+import deliveryicon from "../assets/배송 아이콘.png";
+import qualityicon from "../assets/품질 아이콘.png";
 
 const Url2 = 'https://6503-158-247-236-58.ngrok-free.app';
 
 const Review = () => {
     const [selectedKeywords, setSelectedKeywords] = useState([]);
     const [reviewText, setReviewText] = useState('');
-    const [productInfo, setProductInfo] = useState(null); // 상품 정보를 관리하는 state
+    const [productInfo, setProductInfo] = useState(null);
 
     const keywordMap = {
         '가성비': '가성비가 좋아요.',
         '품질': '품질이 우수해요.',
         '배송': '배송이 빨라요.'
+    };
+
+    const iconMap = {
+        '가성비': priceicon,
+        '품질': qualityicon,
+        '배송': deliveryicon
     };
 
     const toggleKeyword = (keyword) => {
@@ -28,7 +37,7 @@ const Review = () => {
     const submitReview = async () => {
         try {
             const mappedKeywords = selectedKeywords.map(keyword => keywordMap[keyword]);
-            
+
             const body = {
                 comment: reviewText,
                 keywords: mappedKeywords
@@ -44,7 +53,7 @@ const Review = () => {
                 }
             });
 
-            console.log(response.data); // 콘솔로 결과 확인
+            console.log(response.data); 
 
         } catch (error) {
             console.error("Error submitting review:", error);
@@ -56,12 +65,11 @@ const Review = () => {
     const orderId = location.state.orderId;
 
     useEffect(() => {
-        // 상품 정보를 가져오는 함수
         const fetchProductInfo = async () => {
             try {
                 const accessToken = localStorage.getItem('accessToken');
                 const refreshToken = localStorage.getItem('refreshToken');
-                
+
                 const response = await axios.get(`${Url2}/api/v1/orders/${orderId}/products/${productId}/review-form`, {
                     headers: {
                         'ngrok-skip-browser-warning': '69420',
@@ -73,6 +81,7 @@ const Review = () => {
                 });
 
                 setProductInfo(response.data);
+
             } catch (error) {
                 console.error("Error fetching product info:", error);
             }
@@ -84,24 +93,22 @@ const Review = () => {
     return (
         <Container>
             <Nav backTo='/orderinquiry'>리뷰</Nav>
-
-            {productInfo && (  // 상품 정보가 로드되었을 때만 표시
+            {productInfo && (
                 <div>
                     <h3>{productInfo.productName}</h3>
-                    {/* <p>{productInfo.brand}</p>
-                    <p>{productInfo.price}원</p> */}
                 </div>
             )}
 
             <MainQuestion>어떤 점을 추천하나요? (1-3개)</MainQuestion>
             <SubQuestion>이 제품에 맞는 키워드를 골라주세요.</SubQuestion>
+
             <Label>가격/품질</Label>
             <KeywordContainer>
                 <KeywordBox 
                     selected={selectedKeywords.includes('가성비')}
                     onClick={() => toggleKeyword('가성비')}
                 >
-                    <KeywordIcon src="iconPath" />
+                    <KeywordIcon src={iconMap['가성비']} />
                     <KeywordLabel selected={selectedKeywords.includes('가성비')}>
                         가성비가 좋아요.
                     </KeywordLabel>
@@ -110,24 +117,26 @@ const Review = () => {
                     selected={selectedKeywords.includes('품질')}
                     onClick={() => toggleKeyword('품질')}
                 >
-                    <KeywordIcon src="iconPath" />
+                    <KeywordIcon src={iconMap['품질']} />
                     <KeywordLabel selected={selectedKeywords.includes('품질')}>
                         품질이 우수해요.
                     </KeywordLabel>
                 </KeywordBox>
             </KeywordContainer>
+
             <Label>배송</Label>
             <KeywordContainer>
                 <KeywordBox 
                     selected={selectedKeywords.includes('배송')}
                     onClick={() => toggleKeyword('배송')}
                 >
-                    <KeywordIcon src="iconPath" />
+                    <KeywordIcon src={iconMap['배송']} />
                     <KeywordLabel selected={selectedKeywords.includes('배송')}>
                         배송이 빨라요.
                     </KeywordLabel>
                 </KeywordBox>
             </KeywordContainer>
+
             <Line />
             <ReviewContainer>
                 <ReviewTitle>리뷰를 작성해주세요.</ReviewTitle>
@@ -149,6 +158,7 @@ const Review = () => {
 };
 
 export default Review;
+
 
 const Container = styled.div`
     font-family: Arial, sans-serif;
@@ -205,9 +215,9 @@ const KeywordBox = styled.div`
 `;
 
 const KeywordIcon = styled.img`
-    width: 2vw;
-    height: 2vw;
-    margin-right: 0.5vw;
+    width: 24px;
+    height: 24px;
+    margin-right: 29px;
 `;
 
 const KeywordLabel = styled.span`
