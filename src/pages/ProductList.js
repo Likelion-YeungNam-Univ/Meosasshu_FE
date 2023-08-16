@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 import TapBar from "../components/TapBar";
-import ProductBox from '../components/ProductBox';
+import ProductListItem from '../components/ProductListItem';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
-import { useState, useEffect } from 'react';
-import axios from "axios";
+import {useState, useEffect } from 'react';
+import axios from 'axios';
 
 const ProductListBox = styled.div`
 @media only screen and (min-width: 430px) {
@@ -15,18 +15,18 @@ const ProductListBox = styled.div`
 @media only screen and (max-width: 430px) {
 max-width: auto;
 margin: auto;
-}
-`;
+}`;
 
 const ProductBlock = styled.div`
+flex-wrap: wrap;
 display:flex;
-justify-content: space-around;
+justify-content: flex-start;
 margin-left: 5px;
 `;
 
 const ProductSearchBar =styled.input`
 margin:auto; 
-width:310px;
+width:280px;
 height:35px;
 border:none;
 background:#F0F1F5;
@@ -45,63 +45,60 @@ background: transparent;
 
 
 const ProductList = () => {
-const [Search,setSearch]=useState(true)
+    
+const [Search,setSearch]=useState(true);
+const [keyword, setKeyword]=useState('');
+const [searchProduct,setSearchProduct] = useState(null);
 
-// const onclick = () => {
-//     console.log("클릭")
-// }
+const apiUrl='https://6503-158-247-236-58.ngrok-free.app';
 
-const apiUrl = 'https://6503-158-247-236-58.ngrok-free.app';
-
-const data = async () => {
+const data = async() => {
     try{
-        const res = await axios.get(apiUrl + '/api/v1/products',
-        {
-            params: {
-               page: 0
-            },
-        },{ withCredentials: true,'Content-Type': `application/json`,'ngrok-skip-browser-warning': '69420', });
-    console.log(res.data);
+        const res = await axios.get(apiUrl+'/api/v1/products/search?',{
+        headers: {'Content-Type': `application/json`,'ngrok-skip-browser-warning': '69420',},
+        params: {keyword: keyword}
+        }
+)
+        //console.log(res.data);
+        setSearchProduct(res.data);
     }
     catch (error) {
-        console.error('Error', error);
-      }
+        console.error('Error:',error);
+    }
 }
 
-useEffect(() => {
-    data();
-  }, []);
+    useEffect(() => {
+        if (keyword) {
+        data();
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [keyword]);
 
+    const searchKeyword = (e) => {
+        setKeyword(e.target.value);
+      };
+
+
+      //console.log(searchProduct)
     return (
         <>
         <ProductListBox>
             {Search ? 
             <div style={{display:'flex', margin:'10px 5px 20px 45px', alignItems:'center'}}>
-                <b style={{fontSize:'20px', fontWeight:'600', margin:'auto'}}>페이지이름</b>
-                <SearchOutlinedIcon fontSize='large' sx={{marginRight:'10px'}} onClick={()=>setSearch(!Search)}/>
+                <SearchOutlinedIcon fontSize='large' sx={{marginLeft:'85%'}} onClick={()=>setSearch(!Search)}/>
             </div>
             : <div style={{display:'flex', margin:'10px 5px 20px 5px', alignItems:'center'}}>
                 <ArrowBackOutlinedIcon fontSize='large' onClick={()=>setSearch(true)}/>
                 <label style={{position:'relative'}}>
-                    <ProductSearchBar type="search" name="q"></ProductSearchBar>
-                    <ProductSearchBtn type='submit' onClick={onclick}><SearchOutlinedIcon sx={{color:'#929294'}}/></ProductSearchBtn>
+                    <ProductSearchBar type="text"
+                                      value={keyword}
+                                      onChange={searchKeyword}></ProductSearchBar>
+                    <ProductSearchBtn type='submit' ><SearchOutlinedIcon sx={{color:'#929294'}}/></ProductSearchBtn>
                 </label>
               </div> }
             <ProductBlock>
-                <ProductBox/>
-                <ProductBox/>
+                {searchProduct?.content.map((res)=><ProductListItem key={res.id} res={res}/>)}
             </ProductBlock>
-            <hr style={{border:'solid 1.5px #F0F1F5'}}/>
-            <ProductBlock>
-                <ProductBox/>
-                <ProductBox/>
-            </ProductBlock>
-            <hr style={{border:'solid 1.5px #F0F1F5'}}/>
-            <ProductBlock>
-                <ProductBox/>
-                <ProductBox/>
-            </ProductBlock>
-            <hr style={{border:'solid 1.5px #F0F1F5'}}/>
             
             <hr style={{border:'solid 30px #FFF'}}/>
             <TapBar/>
