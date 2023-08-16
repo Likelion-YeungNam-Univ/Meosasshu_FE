@@ -5,37 +5,48 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 const Product = () => {
-    const [showContent, setShowContent] = useState(false); 
-    const [summaryContent, setSummaryContent] = useState(''); 
-    const [detailedContent, setDetailedContent] = useState(''); 
-    const [productData, setProductId] = useState(''); 
-    
+    const [showContent, setShowContent] = useState(false);
+    const [productData, setProductData] = useState({});
+    const [summaryContent, setSummaryContent] = useState(''); // 초기값 설정 필요
+    const [detailedContent, setDetailedContent] = useState(''); // 초기값 설정 필요
+
+    const apiUrl = 'https://6503-158-247-236-58.ngrok-free.app';
+
     const toggleContent = () => {
-      setShowContent(prevShowContent => !prevShowContent);
+        setShowContent(prevShowContent => !prevShowContent);
     };
-  
+
     useEffect(() => {
-        fetchData(productData); 
-      }, [productData]);
-    
-      const fetchData = async () => {
-        try {
-          const response = await axios.get('https://979c-64-176-225-1.ngrok-free.app'); 
-          const data = response.data; 
-          setSummaryContent(data.summaryContent);
-          setDetailedContent(data.detailedContent);
-          setProductId(data.setProductId);
-        } catch (error) {
-          console.error('Error fetching data:', error);
-        }
-      };
+        const send = async () => {
+            try {
+                const accessToken = localStorage.getItem('accessToken');
+                const refreshToken = localStorage.getItem('refreshToken');
+                const res = await axios.get(apiUrl + '/api/v1/products/1', {
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'ngrok-skip-browser-warning': '69420',
+                    },
+                });
+                console.log('AccessToken:', accessToken);
+                console.log('RefreshToken:', refreshToken);
+                console.log(res.data); 
+                setProductData(res.data); 
+                setSummaryContent(res.data.shortDescription);
+                setDetailedContent(res.data.description);
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            }
+        };
+
+        send(); // 초기 렌더링 시 데이터 가져오기 호출
+    }, []);
     
     return (
       <Container>
         <Box>
           <Nav />
           <ProductContainer>
-          <ItemImage src="https://via.placeholder.com/500x500" alt="상품 이미지" />
+          <ItemImage src={productData.thumbnailUrl} alt="상품 이미지" />
           <ItemDescription>{productData.name}</ItemDescription>
           <PriceContainer>
           <PriceInfo>
