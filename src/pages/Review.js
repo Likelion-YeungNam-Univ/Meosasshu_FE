@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import Nav from "../components/Nav";
 import styled from "styled-components";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const Url2 = 'https://6503-158-247-236-58.ngrok-free.app';
 
 const Review = () => {
     const [selectedKeywords, setSelectedKeywords] = useState([]);
     const [reviewText, setReviewText] = useState('');
+    const [productInfo, setProductInfo] = useState(null); // 상품 정보를 관리하는 state
 
     const keywordMap = {
         '가성비': '가성비가 좋아요.',
@@ -35,7 +37,7 @@ const Review = () => {
             const accessToken = localStorage.getItem('accessToken');
             const refreshToken = localStorage.getItem('refreshToken');
 
-            const response = await axios.post(`${Url2}/api/v1/products/${productNumber}/reviews`, body, {
+            const response = await axios.post(`${Url2}/api/v1/products/${productId}/reviews`, body, {
                 headers: {
                     "accessToken": accessToken,
                     "refreshToken": refreshToken
@@ -49,16 +51,48 @@ const Review = () => {
         }
     };
 
-    const orderNumber = 1;
-    const productNumber = 1;
+    const location = useLocation();
+    const productId = location.state.productId;
+    const orderId = location.state.orderId;
 
-    // useEffect(() => {
-    //     getReviewForm(orderNumber, productNumber);
-    // }, []);
+    useEffect(() => {
+        // 상품 정보를 가져오는 함수
+        const fetchProductInfo = async () => {
+            try {
+                const accessToken = localStorage.getItem('accessToken');
+                const refreshToken = localStorage.getItem('refreshToken');
+                
+                const response = await axios.get(`${Url2}/api/v1/orders/${orderId}/products/${productId}/review-form`, {
+                    headers: {
+                        'ngrok-skip-browser-warning': '69420',
+                        "withCredential": "true",
+                        "Content-Type": "application/json",
+                        "accessToken": accessToken,
+                        "refreshToken": refreshToken
+                    }
+                });
+
+                setProductInfo(response.data);
+            } catch (error) {
+                console.error("Error fetching product info:", error);
+            }
+        };
+
+        fetchProductInfo();
+    }, [orderId, productId]);
 
     return (
         <Container>
-            <Nav>리뷰</Nav>
+            <Nav backTo='/orderinquiry'>리뷰</Nav>
+
+            {productInfo && (  // 상품 정보가 로드되었을 때만 표시
+                <div>
+                    <h3>{productInfo.productName}</h3>
+                    {/* <p>{productInfo.brand}</p>
+                    <p>{productInfo.price}원</p> */}
+                </div>
+            )}
+
             <MainQuestion>어떤 점을 추천하나요? (1-3개)</MainQuestion>
             <SubQuestion>이 제품에 맞는 키워드를 골라주세요.</SubQuestion>
             <Label>가격/품질</Label>
@@ -192,29 +226,37 @@ const ReviewContainer = styled.div`
     display: flex;
     flex-direction: column;
     gap: 1vh;
+    align-items: center;
 `;
 
 const ReviewTitle = styled.h2`
-    font-size: 1.5vw;
-    font-weight: bold;
+    font-size: 20px;
+    font-weight: 600;
     margin-bottom: 1vh;
+   
 `;
 
 const ReviewInput = styled.textarea`
-    width: 100%;
-    height: 20vh;
+    width: 350px;
+    height: 100px;
     padding: 1vh;
     background-color: #F0F1F5;
     border: none;
     border-radius: 1vh;
     resize: vertical;
+    color: #929294;
+    font-size: 16px;
+    font-weight: 500;
 `;
 
 const SubmitButton = styled.button`
-    width: 50%;
+    width: 150px;
+    height: 50px;
     padding: 1vh 2vw;
     background-color: ${props => props.disabled ? '#929294' : '#BCC454'};
     color: white;
+    font-size: 20px;
+    font-weight: 700;
     border: none;
     border-radius: 1vh;
     cursor: pointer;
