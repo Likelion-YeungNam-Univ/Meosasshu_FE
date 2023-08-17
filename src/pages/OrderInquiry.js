@@ -110,15 +110,60 @@ const PriceText = styled.p`
 
 `;
 
+const Popup = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+
+const PopupInner = styled.div`
+  width: 80%;
+  max-width: 500px;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  text-align: center;
+`;
+
+const PopupText = styled.p`
+  margin-bottom: 20px;
+`;
+
+const PopupButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const PopupButton = styled.button`
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #BCC454;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #929294;
+  }
+`;
 
 const OrderInquiry = () => {
+  const [data, setData] = useState(null);
+  const [showLoginPopup, setShowLoginPopup] = useState(false); 
+  const URL = 'https://b681-158-247-242-10.ngrok-free.app';
+  const navigate = useNavigate();
+
   const handleReviewButtonClick = (productId, orderId) => {
     navigate('/review', { state: { productId, orderId } });
-  };  
-  
-  const [data, setData] = useState(null);
-  const URL = 'https://1511-222-233-66-35.ngrok-free.app';
-  const navigate = useNavigate();
+  };
+
   useEffect(() => {
     const fetchOrders = async () => {
       const accessToken = localStorage.getItem('accessToken');
@@ -138,7 +183,13 @@ const OrderInquiry = () => {
         setData(response.data);
         console.log(response);
       } catch (error) {
-        console.error("API 요청 중 오류 발생:", error);
+        setShowLoginPopup(true);
+        console.log(showLoginPopup);
+        if (error.response && error.response.status === 400) {
+
+        } else {
+        console.error("error", error);
+      }
       }
     };
 
@@ -155,7 +206,7 @@ const OrderInquiry = () => {
       {data.content.map(order => (
         <OrderContainer key={order.orderId}>
           <OrderHeader>
-          <span>{new Date(...order.orderDate).toLocaleDateString()}</span>
+            <span>{new Date(...order.orderDate).toLocaleDateString()}</span>
           </OrderHeader>
           <ProductList>
             {order.orderProducts.map(product => (
@@ -164,17 +215,17 @@ const OrderInquiry = () => {
                   <TopRow>
                     <ProductImage src={product.imageUrl} alt={product.productName} />
                     <ProductDetails>
-                     <BrandText>{product.brand}</BrandText>
-                    <div>
-                      <ProductNameText>{product.productName}</ProductNameText>
-                      <QuantityText>수량: {product.quantity}</QuantityText>
-                    </div>
-                    <PriceText>{product.totalPrice.toFixed(2)}원</PriceText>
-                  </ProductDetails>
+                      <BrandText>{product.brand}</BrandText>
+                      <div>
+                        <ProductNameText>{product.productName}</ProductNameText>
+                        <QuantityText>수량: {product.quantity}</QuantityText>
+                      </div>
+                      <PriceText>{product.totalPrice.toFixed(2)}원</PriceText>
+                    </ProductDetails>
                   </TopRow>
                   <ButtonContainer>
                     <ActionButton>배송조회</ActionButton>
-                    <ActionButton style={{border: '1px solid #BCC454', color:'#BCC454'}}onClick={() => handleReviewButtonClick(product.productId, order.orderId)}>
+                    <ActionButton style={{border: '1px solid #BCC454', color:'#BCC454'}} onClick={() => handleReviewButtonClick(product.productId, order.orderId)}>
                       리뷰 작성하기
                     </ActionButton>
                   </ButtonContainer>
@@ -184,6 +235,16 @@ const OrderInquiry = () => {
           </ProductList>
         </OrderContainer>
       ))}
+      {showLoginPopup && (
+        <Popup>
+          <PopupInner>
+            <PopupText>로그인이 필요한 페이지입니다.<br /> 로그인 하시겠습니까?</PopupText>
+            <PopupButtonWrapper>
+              <PopupButton onClick={() => navigate('/login')}>로그인 하러 가기</PopupButton>
+            </PopupButtonWrapper>
+          </PopupInner>
+        </Popup>
+      )}
     </div>
   );
 };
