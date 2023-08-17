@@ -44,7 +44,7 @@ const Product = () => {
     return (
       <Container>
         <Box>
-          <Nav />
+          <Nav backTo='/productlist'></Nav>
           <ProductContainer>
           <ItemImage src={productData.thumbnailUrl} alt="상품 이미지" />
           <ItemDescription>{productData.name}</ItemDescription>
