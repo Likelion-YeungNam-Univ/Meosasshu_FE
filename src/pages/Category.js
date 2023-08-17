@@ -6,48 +6,48 @@ import DoctorsBag from "../assets/Doctors Bag.png";
 import  Therapy from "../assets/Therapy.png";
 import Caretaker from "../assets/Caretaker.png";
 import Nappy from "../assets/Nappy.png";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import React from 'react';
 
 const Category = () => {
+    const navigate= useNavigate();
+
+    const handleNavigation = (categoryId) => {
+        navigate('/categorydetail', {
+            state: {id: categoryId }
+        });
+        console.log(categoryId)
+    };
+
     return(
         <>
         <CategoryBox>
             <Search/>
             <div style={{background:'#F0F1F5', height:'100vh', paddingTop:'20px'}}>
                 <CategoryBlock>
-                    <CategoryLink to="">
-                        <CategoryItem>
+                        <CategoryItem  onClick={() => handleNavigation(1)}>
                             <img  src={Clothes} alt="의류"/>
                             <CategoryItemName>의류</CategoryItemName>
                         </CategoryItem>
-                    </CategoryLink>
-                    <CategoryLink to="">
-                        <CategoryItem>
+                        <CategoryItem  onClick={() => handleNavigation(2)}>
                             <img  src={DoctorsBag} alt="건강식품"/>
                             <CategoryItemName>건강식품</CategoryItemName>
-                        </CategoryItem>
-                    </CategoryLink>
+                        </CategoryItem>   
                 </CategoryBlock>
                 <CategoryBlock>
-                   <CategoryLink to="">
-                        <CategoryItem>
+                        <CategoryItem  onClick={() => handleNavigation(3)}>
                             <img  src={Therapy} alt="의료용품"/>
                             <CategoryItemName>의료용품</CategoryItemName>
                         </CategoryItem>
-                    </CategoryLink>
-                    <CategoryLink to="">
-                        <CategoryItem>
+                        <CategoryItem  onClick={() => handleNavigation(4)}>
                             <img  src={Caretaker} alt="생활용품"/>
                             <CategoryItemName>생활용품</CategoryItemName>
                         </CategoryItem>
-                    </CategoryLink>
                 </CategoryBlock>
-                <CategoryLink to="">
-                    <CategoryItem style={{marginLeft:'9px'}}>
-                            <img  src={Nappy} alt="귀저기"/>
-                            <CategoryItemName>귀저기</CategoryItemName>
-                    </CategoryItem>
-                </CategoryLink>
+                <CategoryItem style={{marginLeft:'12px'}}  onClick={() => handleNavigation(5)} >
+                        <img  src={Nappy} alt="기저귀"/>
+                        <CategoryItemName>기저귀</CategoryItemName>
+                </CategoryItem>
             </div>
             <TapBar/>
         </CategoryBox>
@@ -74,8 +74,8 @@ justify-content: space-around;
 `;
 
 const CategoryItem = styled.div`
-width:165px;
-height:165px;
+width:155px;
+height:155px;
 background:#BCC454;
 margin-top: 20px;
 display: flex;
@@ -92,7 +92,3 @@ font-style: normal;
 font-weight: 500;
 `;
 
-const CategoryLink = styled(Link)`
-color: #000;
-text-decoration: none;
-`;
