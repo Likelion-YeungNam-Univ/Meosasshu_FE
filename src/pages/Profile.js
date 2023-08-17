@@ -16,10 +16,14 @@ const Profile = () => {
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
   const url = "https://6503-158-247-236-58.ngrok-free.app"
   const accessToken = localStorage.getItem("accessToken");
+  const refreshToken = localStorage.getItem("refreshToken");
   const handleLogout = async () => {
     try {
-      const response = await axios.post(url + "/api/v1/auth/logout", {
-        'accessToken': accessToken
+      const response = await axios.post(`${url}/api/v1/auth/logout`,{},{
+      headers : {
+        accessToken: accessToken,
+        refreshToken: refreshToken
+      }
       });
 
       if (response.status === 200) {
