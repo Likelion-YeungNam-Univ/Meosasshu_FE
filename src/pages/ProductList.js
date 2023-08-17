@@ -5,14 +5,15 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import {useState, useEffect } from 'react';
 import axios from 'axios';
+import { useLocation } from 'react-router-dom';
 
 const ProductList = () => {
-    
-const [Search,setSearch]=useState(true);
-const [keyword, setKeyword]=useState('');
 const [searchProduct,setSearchProduct] = useState(null);
+const location = useLocation();
+const  inputMic = location.state.transcript;
+const [keyword, setKeyword]=useState(inputMic || '');
 
-const apiUrl='https://6503-158-247-236-58.ngrok-free.app';
+const apiUrl='https://1511-222-233-66-35.ngrok-free.app';
 
 const data = async() => {
     try{
@@ -45,19 +46,13 @@ const data = async() => {
     return (
         <>
         <ProductListBox>
-            {Search ? 
-            <div style={{display:'flex', margin:'10px 5px 20px 45px', alignItems:'center'}}>
-                <SearchOutlinedIcon fontSize='large' sx={{marginLeft:'85%'}} onClick={()=>setSearch(!Search)}/>
-            </div>
-            : <div style={{display:'flex', margin:'10px 5px 20px 5px', alignItems:'center'}}>
-                <ArrowBackOutlinedIcon fontSize='large' onClick={()=>setSearch(true)}/>
+             <div style={{display:'flex', margin:'10px 5px 20px 5px', alignItems:'center'}}>
+                <ArrowBackOutlinedIcon fontSize='large'/>
                 <label style={{position:'relative'}}>
-                    <ProductSearchBar type="text"
-                                      value={keyword}
-                                      onChange={searchKeyword}></ProductSearchBar>
+                    <ProductSearchBar type="text" value={keyword} onChange={searchKeyword}></ProductSearchBar>
                     <ProductSearchBtn type='submit' ><SearchOutlinedIcon sx={{color:'#929294'}}/></ProductSearchBtn>
                 </label>
-              </div> }
+              </div> 
             <ProductBlock>
                 {searchProduct?.content.map((res)=><ProductListItem key={res.id} res={res}/>)}
             </ProductBlock>
