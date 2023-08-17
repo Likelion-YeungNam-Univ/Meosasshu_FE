@@ -18,13 +18,13 @@ export default ProductBox;
 
 const ProductContainer = styled.div`
     padding: 5px;
-    width: 185px; 
+    width: 170px; 
     height: 300px;
 `;
 
 const ItemImage = styled.img`
-  width: 180px;
-  height: 180px;
+  width: 165px;
+  height: 165px;
   object-fit: cover;
   margin-bottom: 5px;
   border-radius: 2px;
