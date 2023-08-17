@@ -13,7 +13,7 @@ const CategoryDetail = () => {
 
     //console.log({categoryId})
 
-    const apiUrl='https://6503-158-247-236-58.ngrok-free.app';
+    const apiUrl='https://b681-158-247-242-10.ngrok-free.app';
 
     const Data = async() => {
         try{

@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import Header from "../components/Header";
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
-import OrderCheck from "../assets/주문 목록.png"
-import Cancel from "../assets/취소 교환 환불 내역.png"
-import Setting from "../assets/환경 설정.png"
-import Logout from "../assets/Logout.png"
+import OrderCheck from "../assets/주문 목록.png";
+import Cancel from "../assets/취소 교환 환불 내역.png";
+import Setting from "../assets/환경 설정.png";
+import Logout from "../assets/Logout.png";
 import { useNavigate } from 'react-router-dom'; 
 import TapBar from "../components/TapBar";
 import axios from "axios";
@@ -14,28 +14,36 @@ import ListenPopUp from "./ListenPopUp";
 const Profile = () => {
   const navigate = useNavigate(); 
   const [showLogoutPopup, setShowLogoutPopup] = useState(false);
-  const url = "https://1511-222-233-66-35.ngrok-free.app"
+  const [showPopUp, setShowPopUp] = useState(false);
+  const [showLoginPopup, setShowLoginPopup] = useState(false);
+
+  const url = "https://b681-158-247-242-10.ngrok-free.app";
   const accessToken = localStorage.getItem("accessToken");
   const refreshToken = localStorage.getItem("refreshToken");
+
   const handleLogout = async () => {
     try {
       const response = await axios.post(`${url}/api/v1/auth/logout`,{},{
-      headers : {
-        accessToken: accessToken,
-        refreshToken: refreshToken
-      }
+        headers : {
+          accessToken: accessToken,
+          refreshToken: refreshToken
+        }
       });
 
       if (response.status === 200) {
-        navigate("/"); // 로그아웃 성공 시 메인 페이지로 이동
+        navigate("/");
       } else {
         console.error("로그아웃 실패");
       }
     } catch (error) {
-      console.error("로그아웃 실패:", error);
+      if (error.response && error.response.status === 400) {
+        setShowLoginPopup(true);
+      } else {
+        console.error("로그아웃 실패:", error);
+      }
     }
   };
-  const [showPopUp, setShowPopUp] = useState(false);
+
   return (
     <>
       <Header>내 정보</Header>
@@ -73,15 +81,25 @@ const Profile = () => {
         <TapBar onMicClick={() => setShowPopUp(true)} />
 
         {showPopUp && <ListenPopUp onClose={() => setShowPopUp(false)} />}
-
-
+        
         {showLogoutPopup && (
           <Popup>
             <PopupInner>
               <PopupText>로그아웃을 하시겠습니까?</PopupText>
               <PopupButtonWrapper>
-              <PopupButton onClick={handleLogout}>네</PopupButton>
-              <PopupButton onClick={() => setShowLogoutPopup(false)}>아니오</PopupButton>
+                <PopupButton onClick={handleLogout}>네</PopupButton>
+                <PopupButton onClick={() => setShowLogoutPopup(false)}>아니오</PopupButton>
+              </PopupButtonWrapper>
+            </PopupInner>
+          </Popup>
+        )}
+
+        {showLoginPopup && (
+          <Popup>
+            <PopupInner>
+              <PopupText>로그인이 필요한 페이지입니다. <br /> 로그인 하시겠습니까?</PopupText>
+              <PopupButtonWrapper>
+                <PopupButton2 onClick={() => navigate('/login')}>로그인 하러 가기</PopupButton2>
               </PopupButtonWrapper>
             </PopupInner>
           </Popup>
@@ -92,6 +110,21 @@ const Profile = () => {
 };
 
 export default Profile;
+
+const PopupButton2 = styled.div`
+  width: 100%;
+  padding: 10px;
+  border: none;
+  background-color: #BCC454;
+  color: white; 
+  border-radius: 5px;
+  cursor: pointer;
+  align-items: center;
+
+  &:hover {
+    background-color: #929294;
+}
+`;
 
 const Body = styled.div`
   margin-top: 50px;

@@ -3,6 +3,7 @@ import Nav from '../components/Nav';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const Product = () => {
     const [showContent, setShowContent] = useState(false);
@@ -10,25 +11,22 @@ const Product = () => {
     const [summaryContent, setSummaryContent] = useState(''); // 초기값 설정 필요
     const [detailedContent, setDetailedContent] = useState(''); // 초기값 설정 필요
 
-    const apiUrl = 'https://6503-158-247-236-58.ngrok-free.app';
+    const apiUrl = 'https://b681-158-247-242-10.ngrok-free.app';
 
     const toggleContent = () => {
         setShowContent(prevShowContent => !prevShowContent);
     };
-
+    const productNumber = 1;
+  
     useEffect(() => {
         const send = async () => {
             try {
-                const accessToken = localStorage.getItem('accessToken');
-                const refreshToken = localStorage.getItem('refreshToken');
-                const res = await axios.get(apiUrl + '/api/v1/products/1', {
+                const res = await axios.get(`${apiUrl}/api/v1/products/${productNumber}`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'ngrok-skip-browser-warning': '69420',
                     },
                 });
-                console.log('AccessToken:', accessToken);
-                console.log('RefreshToken:', refreshToken);
                 console.log(res.data); 
                 setProductData(res.data); 
                 setSummaryContent(res.data.shortDescription);
@@ -40,6 +38,38 @@ const Product = () => {
 
         send(); // 초기 렌더링 시 데이터 가져오기 호출
     }, []);
+    const navigate = useNavigate();
+    const addToCart = async () => {
+      try {
+          const accessToken = localStorage.getItem('accessToken');
+          const refreshToken = localStorage.getItem("refreshToken");
+          const res = await axios.post(apiUrl + '/api/v1/cart', {
+              'productId': productNumber,
+              'quantity':1,
+          }, {
+              headers: {
+                'Content-Type': 'application/json',
+                'ngrok-skip-browser-warning': '69420',
+                'accessToken': accessToken,
+                'refreshToken' : refreshToken
+              }
+          });
+  
+          if (res.status === 201) {
+              alert('장바구니에 상품이 담겼습니다. 장바구니로 이동하시겠습니까?');
+
+              if (window.confirm('장바구니로 이동하시겠습니까?')) {
+                  navigate('/cart');
+              }
+          } else {
+              alert('상품을 장바구니에 추가하는데 문제가 발생했습니다.1');
+              console.log(res.error)
+          }
+      } catch (error) {
+          console.error('Error adding to cart:', error);
+          alert('상품을 장바구니에 추가하는데 문제가 발생했습니다.2');
+      }
+  };
     
     return (
       <Container>
@@ -85,15 +115,13 @@ const Product = () => {
             </BarChart>
             <ReviewButtonContainer>
                 <ReviewButton>리뷰 더보기</ReviewButton>
-                <Link to="/Review">
-                    <ReviewButton>리뷰 작성하기</ReviewButton>
-                </Link>
             </ReviewButtonContainer>
           </ReviewBox>
           <ChoseBox>
-            <Link to="/cart">
+            <Link onClick={addToCart}>
                 <Buybutton>장바구니</Buybutton>
             </Link>
+
             <Link to="/payment">
                 <Buybutton purchase>구매</Buybutton>
             </Link>

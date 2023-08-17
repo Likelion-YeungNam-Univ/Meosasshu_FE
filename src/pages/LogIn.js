@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UserIcon from "../assets/idicon.png"; 
 import PasswordIcon  from "../assets/pwicon.png"; 
@@ -9,8 +10,9 @@ import axios from 'axios';
 const Login = () => {
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
+  const navigate = useNavigate();
 
-  const apiUrl ='http://118.67.134.65:8080';
+  const apiUrl ='https://b681-158-247-242-10.ngrok-free.app';
   const api = axios.create({
     timeout: 10000, 
   });
@@ -23,9 +25,8 @@ const Login = () => {
       const { accessToken, refreshToken } = response.data; 
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
-      console.log('AccessToken:', accessToken);
-      console.log('RefreshToken:', refreshToken);
       alert('로그인 성공');
+      navigate('/')
     }).catch((error) => {
       alert('로그인 실패');
     });
