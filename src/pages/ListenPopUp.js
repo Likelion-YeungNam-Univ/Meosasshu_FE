@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const ListenPopUp = ({ onClose }) => {
-    const [transcript, setTranscript] = useState(""); // 인식된 음성 텍스트를 저장
+    const [transcript, setTranscript] = useState(""); 
     let recognition;
 
-    // SpeechRecognition 객체 초기화
+    const navigate = useNavigate();
+
     useEffect(() => {
         window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
         recognition = new window.SpeechRecognition();
-        recognition.interimResults = true; // 중간 결과도 반환받음
-        recognition.lang = 'ko-KR'; // 언어 설정
+        recognition.interimResults = true; 
+        recognition.lang = 'ko-KR'; 
 
         recognition.addEventListener('result', (e) => {
             const last = e.results.length - 1;
@@ -19,34 +21,41 @@ const ListenPopUp = ({ onClose }) => {
             console.log(text);
         });
 
-        recognition.start(); // 음성인식 시작
+        recognition.start();
+
+        // 5초 후에 팝업 닫기
+        const timeoutId = setTimeout(handleClose, 5000);
 
         return () => {
-            recognition.stop(); // 컴포넌트 언마운트 시 음성인식 중지
+            recognition.stop();
+            clearTimeout(timeoutId); // Cleanup the timeout if the component is unmounted
         };
     }, []);
 
     const handleBoxClick = (e) => {
-        e.stopPropagation(); // 팝업 내부 클릭시 이벤트 버블링 방지
+        e.stopPropagation(); 
     };
 
     const handleClose = () => {
-        recognition && recognition.stop(); // 음성인식 중지
+        recognition && recognition.stop(); 
         onClose();
+        
+        navigate('/productlist', { state: { transcript } });
     };
 
     return (
         <Container onClick={handleClose}>
             <Box onClick={handleBoxClick}>
-                <CloseButton onClick={handleClose}>X</CloseButton>
+                <CloseButton onClick={handleClose}></CloseButton>
                 듣고있어요
             </Box>
         </Container>
     );
 }
 
-
 export default ListenPopUp;
+
+
 
 const Container = styled.div`
     font-family: 'Arial', sans-serif;
@@ -58,17 +67,28 @@ const Container = styled.div`
     width: 100%;
     height: 100vh;
     display: flex;
-    align-items: center;
+    align-items: center; 
     justify-content: center;
     background-color: rgba(255, 255, 255, 0.5);
     z-index: 1000; // z-index 추가
 `;
 
 const Box = styled.div`
-    padding: 20px 40px;
+    width: 160px;
+    height: 58px;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 50px;
+    border: 1px solid #000;
+    color: #000;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    position: absolute;
+    bottom: 100px; 
 `;
 
 const CloseButton = styled.button`

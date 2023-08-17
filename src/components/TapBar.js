@@ -14,9 +14,15 @@ const TapBar = () => {
     const [showPopUp, setShowPopUp] = useState(false);
 
     const handleMic = () => {
-        setClickMic(!clickMic);
+        setClickMic(false);  // 아이콘을 클릭하면 항상 false로 설정
         setShowPopUp(true);
     };
+
+    const handleClosePopUp = () => {
+        setClickMic(true);  // 팝업을 닫을 때 true로 설정하여 원래 아이콘으로 변경
+        setShowPopUp(false);
+    };
+
 
     return (
         <>
@@ -55,7 +61,7 @@ const TapBar = () => {
                 </div>
             </TapBarBox>
 
-            {showPopUp && <ListenPopUp onClose={() => setShowPopUp(false)} />}
+            {showPopUp && <ListenPopUp onClose={handleClosePopUp} />}
         </>
     );
 }
