@@ -1,67 +1,70 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 import TapBar from "../components/TapBar";
 import ProductListItem from '../components/ProductListItem';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
-import {useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
 
 const ProductList = () => {
-const [searchProduct,setSearchProduct] = useState(null);
-const location = useLocation();
-const  inputMic = location.state.transcript;
-const [keyword, setKeyword]=useState(inputMic || '');
+    const [searchProduct, setSearchProduct] = useState(null);
+    const location = useLocation();
+    const inputMic = location.state?.transcript || '';
+    const [keyword, setKeyword] = useState('');
 
-const apiUrl='https://1511-222-233-66-35.ngrok-free.app';
+    useEffect(() => {
+        setKeyword(inputMic);
+    }, [inputMic]);
 
-const data = async() => {
-    try{
-        const res = await axios.get(apiUrl+'/api/v1/products/search?',{
-        headers: {'Content-Type': `application/json`,'ngrok-skip-browser-warning': '69420',},
-        params: {keyword: keyword}
+    const apiUrl = 'https://1511-222-233-66-35.ngrok-free.app';
+
+    const fetchData = async () => {
+        try {
+            const res = await axios.get(`${apiUrl}/api/v1/products/search`, {
+                headers: {
+                    'Content-Type': 'application/json',
+                    'ngrok-skip-browser-warning': '69420',
+                },
+                params: { keyword }
+            });
+            setSearchProduct(res.data);
+        } catch (error) {
+            console.error('Error:', error);
         }
-)
-        //console.log(res.data);
-        setSearchProduct(res.data);
-    }
-    catch (error) {
-        console.error('Error:',error);
-    }
-}
+    };
 
     useEffect(() => {
         if (keyword) {
-        data();
+            fetchData();
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [keyword]);
 
     const searchKeyword = (e) => {
         setKeyword(e.target.value);
-      };
+    };
 
-
-      //console.log(searchProduct)
     return (
         <>
-        <ProductListBox>
-             <div style={{display:'flex', margin:'10px 5px 20px 5px', alignItems:'center'}}>
-                <ArrowBackOutlinedIcon fontSize='large'/>
-                <label style={{position:'relative'}}>
-                    <ProductSearchBar type="text" value={keyword} onChange={searchKeyword}></ProductSearchBar>
-                    <ProductSearchBtn type='submit' ><SearchOutlinedIcon sx={{color:'#929294'}}/></ProductSearchBtn>
-                </label>
-              </div> 
-            <ProductBlock>
-                {searchProduct?.content.map((res)=><ProductListItem key={res.id} res={res}/>)}
-            </ProductBlock>
-            
-            <hr style={{border:'solid 30px #FFF'}}/>
-            <TapBar/>
-        </ProductListBox>
+            <ProductListBox>
+                <div style={{ display: 'flex', margin: '10px 5px 20px 5px', alignItems: 'center' }}>
+                    <ArrowBackOutlinedIcon fontSize='large' />
+                    <label style={{ position: 'relative' }}>
+                        <ProductSearchBar type="text" value={keyword} onChange={searchKeyword} />
+                        <ProductSearchBtn type='submit'>
+                            <SearchOutlinedIcon sx={{ color: '#929294' }} />
+                        </ProductSearchBtn>
+                    </label>
+                </div>
+                <ProductBlock>
+                    {searchProduct?.content.map((res) => <ProductListItem key={res.id} res={res} />)}
+                </ProductBlock>
+
+                <hr style={{ border: 'solid 30px #FFF' }} />
+                <TapBar />
+            </ProductListBox>
         </>
-    )
+    );
 }
 
 export default ProductList;
