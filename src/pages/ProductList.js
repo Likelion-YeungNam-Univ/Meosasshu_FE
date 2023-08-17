@@ -5,13 +5,19 @@ import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const ProductList = () => {
     const [searchProduct, setSearchProduct] = useState(null);
     const location = useLocation();
     const inputMic = location.state?.transcript || '';
     const [keyword, setKeyword] = useState('');
+
+    const navigate = useNavigate();
+
+    const goToProductDetail = (productId) => {
+        navigate('/product', {state:{ productId }});
+    };
 
     useEffect(() => {
         setKeyword(inputMic);
@@ -29,11 +35,12 @@ const ProductList = () => {
                 params: { keyword }
             });
             setSearchProduct(res.data);
+            console.log(res);
         } catch (error) {
             console.error('Error:', error);
         }
     };
-
+  
     useEffect(() => {
         if (keyword) {
             fetchData();
@@ -57,7 +64,11 @@ const ProductList = () => {
                     </label>
                 </div>
                 <ProductBlock>
-                    {searchProduct?.content.map((res) => <ProductListItem key={res.id} res={res} />)}
+                {searchProduct?.content.map((res) => (
+                        <div onClick={() => goToProductDetail(res.id)} key={res.id}>
+                                <ProductListItem res={res} />
+                        </div>
+                    ))}
                 </ProductBlock>
 
                 <hr style={{ border: 'solid 30px #FFF' }} />

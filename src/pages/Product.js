@@ -4,6 +4,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
 const Product = () => {
     const [showContent, setShowContent] = useState(false);
@@ -17,11 +18,14 @@ const Product = () => {
         setShowContent(prevShowContent => !prevShowContent);
     };
     const productNumber = 1;
+    const location = useLocation();
+    const productId = location.state?.productId;
+
   
     useEffect(() => {
         const send = async () => {
             try {
-                const res = await axios.get(`${apiUrl}/api/v1/products/${productNumber}`, {
+                const res = await axios.get(`${apiUrl}/api/v1/products/${productId}`, {
                     headers: {
                         'Content-Type': 'application/json',
                         'ngrok-skip-browser-warning': '69420',
