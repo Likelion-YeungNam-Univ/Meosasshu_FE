@@ -6,7 +6,7 @@ import RankingImg from '../../assets/Fairytale.png';
 
 const ProductRanking = () => {
     const [products, setProducts] = useState([]);
-    const url = 'https://1511-222-233-66-35.ngrok-free.app'
+    const url = 'https://b681-158-247-242-10.ngrok-free.app'
     const API_URL = url + '/api/v1/products/top-sellers';
 
     useEffect(() => {
