@@ -6,39 +6,55 @@ import axios from 'axios';
 const Payment = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [productData, setProductData] = useState({});
+  const [addressData, setAddressData] = useState({});
 
   const handleOptionChange = event => {
     setSelectedOption(event.target.value);
   };
 
-  const apiUrl = 'https://6503-158-247-236-58.ngrok-free.app';
+  const apiUrl = 'https://1511-222-233-66-35.ngrok-free.app'; // apiUrl을 여기에 정의해주세요
 
   useEffect(() => {
-      const send = async () => {
-          try {
-              const accessToken = localStorage.getItem('accessToken');
-              const refreshToken = localStorage.getItem('refreshToken');
-              const res = await axios.get(apiUrl + '/api/v1/products/1/order-form?quantity=1', {
-                  headers: {
-                      'Content-Type': 'application/json',
-                      'ngrok-skip-browser-warning': '69420',
-                      'accessToken':accessToken,
-                      'refreshToken':refreshToken,
-                  },
-              });
-              console.log('AccessToken:', accessToken);
-              console.log('RefreshToken:', refreshToken);
-              console.log(res.data); 
-              console.log(res.data.orderProducts); 
-              setProductData(res.data); 
-          } catch (error) {
-              console.error('Error fetching data:', error);
-          }
-      };
+    const fetchData = async () => {
+      try {
+        const accessToken = localStorage.getItem('accessToken');
+        const refreshToken = localStorage.getItem('refreshToken');
+          
+        const productResponse = await axios.get(apiUrl + '/api/v1/products/1/order-form?quantity=1', {
+          headers: {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': '69420',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+          },
+        });
 
-      send(); // 초기 렌더링 시 데이터 가져오기 호출
+        const addressResponse = await axios.get(apiUrl + '/api/v1/account/address', {
+          headers: {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': '69420',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+          },
+        });
+
+        console.log('Product Data:', productResponse.data);
+        console.log('Address Data:', addressResponse.data);
+
+        const mergedData = {
+          ...productResponse.data,
+          address: addressResponse.data,
+        };
+
+        setProductData(mergedData);
+        setAddressData(addressResponse.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
   }, []);
-
   return (
     <section>
       <Container>
@@ -51,7 +67,7 @@ const Payment = () => {
             <Information>
               <Title>배송지 정보</Title>
               <Link href='/AddressChange'> 변경하기 </Link>
-              <Address>경북 경산시 대학교280<br/>영남대학교</Address>
+              <Address>{addressData.city}<br/>{addressData.street}<br/>{addressData.zipcode}</Address>
               <Select selectedOption={selectedOption} onChange={handleOptionChange}>
                 <Option value="request">배송 시 요청사항을 선택해주세요</Option>
                 <Option value="security">부재 시 경비실에 맡겨주세요</Option>
