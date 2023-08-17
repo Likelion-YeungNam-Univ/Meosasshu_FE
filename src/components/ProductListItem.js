@@ -4,9 +4,8 @@ import styled from 'styled-components';
 
 const ProductListItem = ({res}) => {
     // const navigate = useNavigate();
-    // // const {id} = useParams();
     // const goProduct = ()=>{
-    //   navigate(`/movies/${res.id}`)
+    //   navigate(`//${res.id}`)
     // }
 
   return (
