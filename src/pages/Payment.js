@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import Nav from '../components/Nav';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
@@ -43,7 +42,14 @@ const Payment = () => {
     <section>
       <Container>
         <Form>
-          <Nav>주문/결제</Nav>
+            <NavbarContainer>
+              <BackButton href='/Product'>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <path d="M16 7H3.83L9.42 1.41L8 0L0 8L8 16L9.41 14.59L3.83 9H16V7Z" fill="black"/>
+                </svg>
+              </BackButton>
+              주문/결제
+            </NavbarContainer>
           <Heading>
             <Title>주문상품 총 {productData.orderProducts ? productData.orderProducts[0].quantity : 0}개</Title>
           </Heading>
@@ -98,6 +104,31 @@ const Payment = () => {
 };
 
 export default Payment;
+
+const NavbarContainer = styled.div`
+  display: flex;
+  justify-content: center;  // 항목들을 중앙에 배치
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  color: #000;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+
+  @media only screen and (max-width: 430px) {
+      max-width: auto;
+  }
+`;
+
+const BackButton = styled.a`
+  position: absolute;  // 절대 위치 지정
+  left: 5px;  // 왼쪽으로 부터의 거리
+`;
+
 
 const FlexContainer = styled.div`
   display: flex;
