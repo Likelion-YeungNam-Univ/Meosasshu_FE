@@ -95,7 +95,7 @@ const ActionButton = styled.button`
 const BrandText = styled.p`
   font-size: 15px;
   font-weight: 400;
-  margin-bottom: 5px;  // 이 값을 조절하여 브랜드 텍스트 아래 간격 조절
+  margin-bottom: 5px;
 `;
 
 const ProductNameText = styled.p`
@@ -117,7 +117,7 @@ const OrderInquiry = () => {
   };  
   
   const [data, setData] = useState(null);
-  const URL = 'https://6503-158-247-236-58.ngrok-free.app';
+  const URL = 'https://1511-222-233-66-35.ngrok-free.app';
   const navigate = useNavigate();
   useEffect(() => {
     const fetchOrders = async () => {

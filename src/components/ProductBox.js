@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ProductBox = () => {
+const ProductBox = ({ thumbnailUrl, brand, productName, price }) => {
   return (
     <section>
       <ProductContainer>
-          <ItemImage src="https://via.placeholder.com/180x180" alt="상품 이미지" />
-          <ItemTitle>상품 이름</ItemTitle>
-          <ItemDescription>상품 설명란</ItemDescription>
-          <ItemPrice>상품 가격</ItemPrice>
+          <ItemImage src={thumbnailUrl || "https://via.placeholder.com/180x180"} alt="상품 이미지" />
+          <ItemTitle>{brand}</ItemTitle>
+          <ItemDescription>{productName}</ItemDescription>
+          <ItemPrice>{price}원 <Discount>50%</Discount></ItemPrice>
       </ProductContainer>
     </section>
   );
@@ -57,4 +57,12 @@ const ItemPrice = styled.div`
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  display: flex;
+  align-items: center;
+`;
+
+const Discount = styled.span`
+  color: red;
+  margin-left:80px;
+  font-weight: bold;
 `;

@@ -12,7 +12,7 @@ const [Search,setSearch]=useState(true);
 const [keyword, setKeyword]=useState('');
 const [searchProduct,setSearchProduct] = useState(null);
 
-const apiUrl='https://6503-158-247-236-58.ngrok-free.app';
+const apiUrl='https://1511-222-233-66-35.ngrok-free.app';
 
 const data = async() => {
     try{
