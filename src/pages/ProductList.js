@@ -17,7 +17,7 @@ const ProductList = () => {
         setKeyword(inputMic);
     }, [inputMic]);
 
-    const apiUrl = 'https://1511-222-233-66-35.ngrok-free.app';
+    const apiUrl = 'https://b681-158-247-242-10.ngrok-free.app';
 
     const fetchData = async () => {
         try {

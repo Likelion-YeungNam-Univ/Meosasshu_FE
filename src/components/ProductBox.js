@@ -63,6 +63,6 @@ const ItemPrice = styled.div`
 
 const Discount = styled.span`
   color: red;
-  margin-left:80px;
+  margin-left:50px;
   font-weight: bold;
 `;

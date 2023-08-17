@@ -10,7 +10,7 @@ const Login = () => {
   const [email, setEmail] = useState('');
   const [pw, setPw] = useState('');
 
-  const apiUrl = 'https://1511-222-233-66-35.ngrok-free.app';
+  const apiUrl ='http://118.67.134.65:8080';
   const api = axios.create({
     timeout: 10000, 
   });
