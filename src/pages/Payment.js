@@ -1,3 +1,4 @@
+
 import styled from 'styled-components';
 import Nav from '../components/Nav';
 import React, { useState, useEffect } from 'react';
@@ -12,7 +13,7 @@ const Payment = () => {
     setSelectedOption(event.target.value);
   };
 
-  const apiUrl = 'https://1511-222-233-66-35.ngrok-free.app'; // apiUrl을 여기에 정의해주세요
+  const apiUrl = 'https://b681-158-247-242-10.ngrok-free.app'; // apiUrl을 여기에 정의해주세요
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +29,7 @@ const Payment = () => {
             'refreshToken': refreshToken,
           },
         });
-
+  
         const addressResponse = await axios.get(apiUrl + '/api/v1/account/address', {
           headers: {
             'Content-Type': 'application/json',
@@ -37,24 +38,78 @@ const Payment = () => {
             'refreshToken': refreshToken,
           },
         });
-
+  
         console.log('Product Data:', productResponse.data);
         console.log('Address Data:', addressResponse.data);
-
+  
         const mergedData = {
           ...productResponse.data,
           address: addressResponse.data,
         };
-
+  
         setProductData(mergedData);
         setAddressData(addressResponse.data);
+        console.log('Merged Data:', mergedData);
+        console.log('Merged Data:', mergedData);
+        // 추가된 부분: orderProducts 로그 출력
+        if (mergedData.orderProducts) {
+          console.log('Order Products:', mergedData.orderProducts);
+        }
+
+        // productId 값이 null이 아닌지 확인 후, 제대로 설정해줍니다.
+        if (mergedData.productId) {
+          setProductData(prevData => ({ ...prevData, productId: mergedData.productId }));
+        }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-
+  
     fetchData();
   }, []);
+  const handleOrder = async () => {
+    try {
+      const accessToken = localStorage.getItem('accessToken');
+      const refreshToken = localStorage.getItem('refreshToken');
+      
+      const orderData = {
+        delivery: {
+          city: addressData.city,
+          street: addressData.street,
+          zipcode: addressData.zipcode,
+          recipientName: 'John Doe', 
+          recipientMobileNumber: '555-123-4567', 
+          deliveryMessage: 'Leave package at the front door', 
+        },
+        orderProducts: [
+          {
+            quantity: 1,
+            productId:productData.orderProducts[0].productId,
+          },
+        ],
+
+      };
+  
+      console.log('orderData:', orderData); // orderData 값 확인
+  
+      const orderResponse = await axios.post(
+        apiUrl + '/api/v1/orders',
+        orderData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'ngrok-skip-browser-warning': '69420',
+            'accessToken': accessToken,
+            'refreshToken': refreshToken,
+          },
+        }
+      );
+  
+    } catch (error) {
+      console.error('Error placing order:', error);
+    }
+  };
+
   return (
     <section>
       <Container>
@@ -105,7 +160,7 @@ const Payment = () => {
               결제 방법
               <NaverPay>네이버 페이</NaverPay>
             </Method>
-            <Button>구매</Button>
+            <Button onClick={handleOrder}>구매</Button>
           </DetailContainer>
         </Form>
       </Container>
