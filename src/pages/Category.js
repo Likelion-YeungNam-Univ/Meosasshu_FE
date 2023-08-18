@@ -4,7 +4,7 @@ import TapBar from "../components/TapBar";
 import Clothes from "../assets/Clothes.png";
 import DoctorsBag from "../assets/Doctors Bag.png";
 import  Therapy from "../assets/Therapy.png";
-import Caretaker from "../assets/Caretaker.png";
+import Caretaker1 from "../assets/Caretaker1.png";
 import Nappy from "../assets/Nappy.png";
 import { useNavigate } from "react-router-dom";
 import React from 'react';
@@ -40,7 +40,7 @@ const Category = () => {
                             <CategoryItemName>의료용품</CategoryItemName>
                         </CategoryItem>
                         <CategoryItem  onClick={() => handleNavigation(4)}>
-                            <img  src={Caretaker} alt="생활용품"/>
+                            <img  src={Caretaker1} alt="생활용품"/>
                             <CategoryItemName>생활용품</CategoryItemName>
                         </CategoryItem>
                 </CategoryBlock>

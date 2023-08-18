@@ -45,7 +45,7 @@ const Profile = () => {
   };
 
   return (
-    <>
+    <ProfileBox>
       <Header>내 정보</Header>
       <Body>
         <Line />
@@ -105,11 +105,22 @@ const Profile = () => {
           </Popup>
         )}
       </Body>
-    </>
+    </ProfileBox>
   );
 };
 
 export default Profile;
+
+const ProfileBox = styled.div`
+@media only screen and (min-width: 430px) {
+    width:365px;
+    margin: auto;
+}
+
+@media only screen and (max-width: 430px) {
+max-width: auto;
+margin: auto;
+}`;
 
 const PopupButton2 = styled.div`
   width: 100%;

@@ -4,15 +4,25 @@ import Nav from "../components/Nav";
 
 const CancelHistory = () => {
     return(
-        <>
+        <CancelHistoryBox>
             <Nav backTo="/profile">취소/교환/환불 내역</Nav>
             <CenteredText>취소/교환/환불 내역이 없습니다.</CenteredText>
-        </>
+        </CancelHistoryBox>
     )
 }
 
 export default CancelHistory;
 
+const CancelHistoryBox = styled.div`
+@media only screen and (min-width: 430px) {
+    width:365px;
+    margin: auto;
+}
+
+@media only screen and (max-width: 430px) {
+max-width: auto;
+margin: auto;
+}`;
 
 const CenteredText = styled.div`
   display: flex;
