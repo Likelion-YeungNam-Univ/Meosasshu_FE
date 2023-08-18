@@ -30,7 +30,7 @@ const Reviews = () => {
   }, [productId]);
   return (
     <>
-    <Nav backTo='/'></Nav>
+    <Nav backTo='/product'></Nav>
     <ReviewListContainer>
     {reviews.length === 0 ? (
       <NoReviewsMessage>아직 등록된 리뷰가 없습니다.</NoReviewsMessage>
