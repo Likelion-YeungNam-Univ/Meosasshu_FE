@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Nav from "../components/Nav";
 import styled from "styled-components";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import priceicon from "../assets/가성비 아이콘.png";
 import deliveryicon from "../assets/배송 아이콘.png";
@@ -13,6 +13,12 @@ const Review = () => {
     const [selectedKeywords, setSelectedKeywords] = useState([]);
     const [reviewText, setReviewText] = useState('');
     const [productInfo, setProductInfo] = useState(null);
+
+    const navigate = useNavigate();
+
+    const goHome = ()=> {
+        navigate('/');
+    }
 
     const keywordMap = {
         '가성비': '가성비가 좋아요.',
@@ -51,9 +57,11 @@ const Review = () => {
                     "accessToken": accessToken,
                     "refreshToken": refreshToken
                 }
-            });
+            })
 
             console.log(response.data); 
+            alert("리뷰가 등록되었습니다.");
+            goHome();
 
         } catch (error) {
             console.error("Error submitting review:", error);
