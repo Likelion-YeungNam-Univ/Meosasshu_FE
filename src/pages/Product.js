@@ -102,8 +102,8 @@ const Product = () => {
           <ItemDescription>{productData.name}</ItemDescription>
           <PriceContainer>
           <PriceInfo>
-              <ItemPrice>{productData.price}</ItemPrice>
-              <OriginalPrice>{productData.price*2}</OriginalPrice>
+              <ItemPrice>{productData.price}원</ItemPrice>
+              <OriginalPrice>{productData.price*2}원</OriginalPrice>
             </PriceInfo>
             <SaleText>{productData.salePercentage} 50% SALE</SaleText>
           </PriceContainer>
@@ -378,17 +378,15 @@ const GPTBox = styled.div`
     }
   `}
 `;
-
 const Title = styled.div`
   color: #000;
   font-family: Inter;
-  font-size: 17px;
-  font-style: normal;
-  font-weight: 500;
+  font-size: 19px;
+  font-style: bold;
+  font-weight: 700; /* 변경된 부분 */
   line-height: normal;
-  margin-bottom:10px;
+  margin-bottom: 10px;
 `;
-
 const ItemDescription = styled.div`
   color: #000;
   font-family: Inter;
@@ -402,7 +400,7 @@ const ItemDescription = styled.div`
 const ItemPrice = styled.div`
   color: #000;
   font-family: Inter;
-  font-size: 25px;
+  font-size: 30px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
@@ -440,7 +438,7 @@ const Buybutton = styled.button`
 const Content = styled.div`
     color: #000;
     font-family: Inter;
-    font-size: 14px;
+    font-size: 17px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
