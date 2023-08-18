@@ -4,6 +4,7 @@ import ProductListItem from '../components/ProductListItem';
 import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
 import ArrowBackOutlinedIcon from '@mui/icons-material/ArrowBackOutlined';
 import { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 
@@ -52,10 +53,10 @@ const ProductList = () => {
     };
 
     return (
-        <ProductListBox>
+        <>
             <ProductListBox>
                 <div style={{ display: 'flex', margin: '10px 5px 20px 5px', alignItems: 'center' }}>
-                    <ArrowBackOutlinedIcon fontSize='large' />
+                    <BackLink to='/'><ArrowBackOutlinedIcon fontSize='large' /></BackLink>
                     <label style={{ position: 'relative' }}>
                         <ProductSearchBar type="text" value={keyword} onChange={searchKeyword} />
                         <ProductSearchBtn type='submit'>
@@ -74,7 +75,7 @@ const ProductList = () => {
                 <hr style={{ border: 'solid 30px #FFF' }} />
                 <TapBar />
             </ProductListBox>
-        </ProductListBox>
+        </>
     );
 }
 
@@ -115,4 +116,9 @@ left:275px;
 top: 3px;
 border:none; 
 background: transparent;
+`;
+
+const BackLink = styled(Link)`
+color: #000;
+text-decoration: none;
 `;
