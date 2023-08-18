@@ -18,31 +18,14 @@ const Profile = () => {
   const [showPopUp, setShowPopUp] = useState(false);
   const [showLoginPopup, setShowLoginPopup] = useState(false);
 
-  const url = "http://118.67.134.65:8080";
-  const accessToken = localStorage.getItem("accessToken");
-  const refreshToken = localStorage.getItem("refreshToken");
+  // const url = "http://118.67.134.65:8080";
+  // const accessToken = localStorage.getItem("accessToken");
+  // const refreshToken = localStorage.getItem("refreshToken");
 
-  const handleLogout = async () => {
-    try {
-      const response = await axios.post(`${url}/api/v1/auth/logout`,{},{
-        headers : {
-          accessToken: accessToken,
-          refreshToken: refreshToken
-        }
-      });
-
-      if (response.status === 200) {
-        navigate("/");
-      } else {
-        console.error("로그아웃 실패");
-      }
-    } catch (error) {
-      if (error.response && error.response.status === 401) {
-        setShowLoginPopup(true);
-      } else {
-        console.error("로그아웃 실패:", error);
-      }
-    }
+  const handleLogout =() =>{
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    navigate("/");
   };
 
   return (
