@@ -17,6 +17,7 @@ import Category from "./pages/Category";
 import CategoryDetail from "./pages/CategoryDetail";
 import AddressChange from "./pages/AddressChange";
 import Reviews from "./pages/reviews";
+import PaymentCart from "./pages/PaymentCart";
 
 const App = () =>{
   return(
@@ -38,6 +39,7 @@ const App = () =>{
       <Route path='/categorydetail' element={<CategoryDetail />}></Route>
       <Route path='/AddressChange' element={<AddressChange />}></Route>
       <Route path='/reviews' element={<Reviews />}></Route>
+      <Route path='/paymentcart' element={<PaymentCart />}></Route>
     </Routes>
     </BrowserRouter>
   )
