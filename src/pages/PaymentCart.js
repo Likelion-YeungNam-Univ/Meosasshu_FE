@@ -162,7 +162,7 @@ const PaymentCart = () => {
         <section>
       <Container>
         <Form>
-          <Nav backTo = '/procuct'>주문/결제</Nav>
+          <Nav backTo = '/Main'>주문/결제</Nav>
           <Heading>
             <Title>주문상품 총 {productData.orderProducts ? productData.orderProducts[0].quantity : 0}개</Title>
           </Heading>

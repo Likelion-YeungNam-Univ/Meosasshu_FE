@@ -7,6 +7,7 @@ import Nav from '../components/Nav';
 const Reviews = () => {
   const [reviews, setReviews] = useState([]);
   const location = useLocation();
+
   const productId = location.state?.productId || 1;
   console.log(productId);
   const url = 'http://118.67.134.65:8080'
@@ -30,7 +31,7 @@ const Reviews = () => {
   }, [productId]);
   return (
     <>
-    <Nav backTo='/product'></Nav>
+    <Nav backTo='/Main'></Nav>
     <ReviewListContainer>
     {reviews.length === 0 ? (
       <NoReviewsMessage>아직 등록된 리뷰가 없습니다.</NoReviewsMessage>
