@@ -96,7 +96,7 @@ const Product = () => {
      <ProductBox>
       <Container>
         <Box>
-          <Nav backTo='/productlist'></Nav>
+          <Nav backTo='/Main'></Nav>
           <ProductContainer>
           <ItemImage src={productData.thumbnailUrl} alt="상품 이미지" />
           <ItemDescription>{productData.name}</ItemDescription>

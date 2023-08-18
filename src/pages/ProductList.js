@@ -56,7 +56,7 @@ const ProductList = () => {
         <>
             <ProductListBox>
                 <div style={{ display: 'flex', margin: '10px 5px 20px 5px', alignItems: 'center' }}>
-                    <BackLink to='/'><ArrowBackOutlinedIcon fontSize='large' /></BackLink>
+                    <BackLink to='/Main'><ArrowBackOutlinedIcon fontSize='large' /></BackLink>
                     <label style={{ position: 'relative' }}>
                         <ProductSearchBar type="text" value={keyword} onChange={searchKeyword} />
                         <ProductSearchBtn type='submit'>
