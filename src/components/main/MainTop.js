@@ -6,6 +6,7 @@ import Therapy from '../../assets/Therapy.png'
 import Caretaker from '../../assets/Caretaker.png'
 import Nappy from '../../assets/Nappy.png'
 import MainImg from '../../assets/image 3.png'
+import { useNavigate } from "react-router-dom";
 
 const MainTopContainer = styled.div`
     text-align: center;
@@ -45,29 +46,37 @@ const CategoryIcon = styled.img`
 `;
 
 const MainTop = () => {
+    const navigate= useNavigate();
+
+    const handleNavigation = (categoryId) => {
+        navigate('/categorydetail', {
+            state: {id: categoryId }
+        });
+        console.log(categoryId)
+    };
     return (
         <MainTopContainer>
             <AdImage>
                 <img src={MainImg} alt="Advert" />
             </AdImage>
             <IconContainer>
-                <CategoryItem>
+                <CategoryItem onClick={() => handleNavigation(1)}>
                     <CategoryIcon src={Clothes} alt="Clothes" />
                     <CategoryText>의류</CategoryText>
                 </CategoryItem>
-                <CategoryItem>
+                <CategoryItem onClick={() => handleNavigation(2)}>
                     <CategoryIcon src={DoctorsBag} alt="Doctors Bag" />
                     <CategoryText>건강식품</CategoryText>
                 </CategoryItem>
-                <CategoryItem>
+                <CategoryItem onClick={() => handleNavigation(3)}>
                     <CategoryIcon src={Therapy} alt="Therapy" />
                     <CategoryText>의료용품</CategoryText>
                 </CategoryItem>
-                <CategoryItem>
+                <CategoryItem onClick={() => handleNavigation(4)}>
                     <CategoryIcon src={Caretaker} alt="Caretaker" />
                     <CategoryText>생활용품</CategoryText>
                 </CategoryItem>
-                <CategoryItem>
+                <CategoryItem onClick={() => handleNavigation(5)}>
                     <CategoryIcon src={Nappy} alt="Nappy" />
                     <CategoryText>기저귀</CategoryText>
                 </CategoryItem>

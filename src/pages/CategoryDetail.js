@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import Search from "../components/Search";
 import TapBar from "../components/TapBar";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
@@ -11,14 +11,20 @@ const CategoryDetail = () => {
     const categoryId = location.state.id;
     const [products, setProducts] = useState([]); // 추가
 
-    //console.log({categoryId})
+    const navigate = useNavigate();
+
+    const goToProductDetail = (productId) => {
+        navigate('/product', {state:{ productId }});
+    };
 
     const apiUrl='https://b681-158-247-242-10.ngrok-free.app';
 
     const Data = async() => {
         try{
             const res = await axios.get(`${apiUrl}/api/v1/category/${categoryId}/products`,{
-            headers: {'Content-Type': `application/json`,'ngrok-skip-browser-warning': '69420',},
+            headers: {
+                'Content-Type': `application/json`,
+                'ngrok-skip-browser-warning': '69420',},
             }
         )
             //console.log(res.data);
@@ -41,7 +47,7 @@ const CategoryDetail = () => {
             <hr style={{border:'solid 10px #FFF'}}/>
             <ProductBlock>
                     {products.map((product) => (
-                        <ProductContainer key={product.id}>
+                        <ProductContainer onClick={() => goToProductDetail(product.id)} key={product.id}>
                             <ItemImage src={product.thumbnailUrl} alt={product.productName} />
                             <ItemTitle>{product.brand}</ItemTitle>
                             <ItemDescription>{product.productName}</ItemDescription>

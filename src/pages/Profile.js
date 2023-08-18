@@ -36,7 +36,7 @@ const Profile = () => {
         console.error("로그아웃 실패");
       }
     } catch (error) {
-      if (error.response && error.response.status === 400) {
+      if (error.response && error.response.status === 401) {
         setShowLoginPopup(true);
       } else {
         console.error("로그아웃 실패:", error);
