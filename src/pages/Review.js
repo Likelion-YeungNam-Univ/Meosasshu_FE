@@ -17,7 +17,7 @@ const Review = () => {
     const navigate = useNavigate();
 
     const goHome = ()=> {
-        navigate('/');
+        navigate('/main');
     }
 
     const keywordMap = {
