@@ -12,7 +12,7 @@ const Payment = () => {
     setSelectedOption(event.target.value);
   };
 
-  const apiUrl = 'https://b681-158-247-242-10.ngrok-free.app'; // apiUrl을 여기에 정의해주세요
+  const apiUrl = 'http://118.67.134.65:8080'; // apiUrl을 여기에 정의해주세요
 
   useEffect(() => {
     const jquery = document.createElement("script");
@@ -154,7 +154,8 @@ const Payment = () => {
 
 
   return (
-    <section>
+   <PaymentBox>
+        <section>
       <Container>
         <Form>
           <Nav backTo = '/procuct'>주문/결제</Nav>
@@ -208,10 +209,24 @@ const Payment = () => {
         </Form>
       </Container>
     </section>
-  );
+ 
+
+   </PaymentBox>
+ );
 };
 
 export default Payment;
+
+const PaymentBox = styled.div`
+@media only screen and (min-width: 430px) {
+    width:365px;
+    margin: auto;
+}
+
+@media only screen and (max-width: 430px) {
+max-width: auto;
+margin: auto;
+}`;
 
 const FlexContainer = styled.div`
   display: flex;
