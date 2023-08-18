@@ -12,7 +12,7 @@ const Login = () => {
   const [pw, setPw] = useState('');
   const navigate = useNavigate();
 
-  const apiUrl ='https://b681-158-247-242-10.ngrok-free.app';
+  const apiUrl ='http://118.67.134.65:8080';
   const api = axios.create({
     timeout: 10000, 
   });
@@ -33,7 +33,8 @@ const Login = () => {
   };
 
   return(
-    <section>
+   <LoginBox>
+          <section>
       <LoginPageContainer>
         <LoginForm>
           <Nav/>
@@ -78,10 +79,25 @@ const Login = () => {
         </LoginForm>
     </LoginPageContainer>
 </section>
+
+   </LoginBox> 
 )
 }
 
 export default Login;
+
+
+const LoginBox = styled.div`
+@media only screen and (min-width: 430px) {
+    width:365px;
+    margin: auto;
+}
+
+@media only screen and (max-width: 430px) {
+max-width: auto;
+margin: auto;
+}`;
+
 
 const LoginPageContainer = styled.div`
   display: flex;
