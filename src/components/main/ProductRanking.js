@@ -3,11 +3,19 @@ import axios from 'axios';
 import styled from 'styled-components';
 import ProductBox from '../ProductBox';
 import RankingImg from '../../assets/Fairytale.png';
+import {  useNavigate } from 'react-router-dom';
 
 const ProductRanking = () => {
     const [products, setProducts] = useState([]);
     const url = 'https://b681-158-247-242-10.ngrok-free.app'
     const API_URL = url + '/api/v1/products/top-sellers';
+
+    const navigate = useNavigate();
+
+    const goToProductDetail = (productId) => {
+        navigate('/product', {state:{ productId }});
+    };
+
 
     useEffect(() => {
         // API 호출
@@ -34,12 +42,12 @@ const ProductRanking = () => {
         <ProductRankingBox>
             <div style={{display:'flex', margin:'20px 10px', alignItems:'center'}}>
                 <div style={{flex:'1', fontSize: '20px', fontWeight: '600'}}>인기 상품</div>
-                <div style={{color:'#B4B4B4', fontSize: '15px'}}> 더보기&gt;&gt; </div>
+                {/* <div style={{color:'#B4B4B4', fontSize: '15px'}}> 더보기&gt;&gt; </div> */}
             </div>
             
             <ProductRaingkBlock>
                 {products.slice(0, 2).map((product, index) => (
-                    <Label key={product.id}>
+                    <Label onClick={() => goToProductDetail(product.id)}key={product.id}>
                         <ProductBox 
                             thumbnailUrl={product.thumbnailUrl}
                             brand={product.brand}

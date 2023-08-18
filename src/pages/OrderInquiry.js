@@ -181,12 +181,10 @@ const OrderInquiry = () => {
         });
 
         setData(response.data);
-        console.log(response);
       } catch (error) {
-        setShowLoginPopup(true);
-        console.log(showLoginPopup);
-        if (error.response && error.response.status === 400) {
-
+        if (error.response && error.response.status === 401) {
+          setShowLoginPopup(true);
+          console.log(showLoginPopup);
         } else {
         console.error("error", error);
       }

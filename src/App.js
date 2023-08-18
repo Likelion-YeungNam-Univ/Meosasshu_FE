@@ -16,6 +16,8 @@ import CancelHistory from "./pages/CancelHistory";
 import Category from "./pages/Category";
 import CategoryDetail from "./pages/CategoryDetail";
 import AddressChange from "./pages/AddressChange";
+import Reviews from "./pages/reviews";
+
 const App = () =>{
   return(
     <BrowserRouter>
@@ -35,6 +37,7 @@ const App = () =>{
       <Route path='/category' element={<Category />}></Route>
       <Route path='/categorydetail' element={<CategoryDetail />}></Route>
       <Route path='/AddressChange' element={<AddressChange />}></Route>
+      <Route path='/reviews' element={<Reviews />}></Route>
     </Routes>
     </BrowserRouter>
   )

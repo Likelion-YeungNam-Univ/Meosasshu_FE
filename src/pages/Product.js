@@ -1,16 +1,20 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import Nav from '../components/Nav';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const Product = () => {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const productId = location.state?.productId;
     const [showContent, setShowContent] = useState(false);
     const [productData, setProductData] = useState({});
-    const [summaryContent, setSummaryContent] = useState(''); // 초기값 설정 필요
-    const [detailedContent, setDetailedContent] = useState(''); // 초기값 설정 필요
+    const [summaryContent, setSummaryContent] = useState(''); 
+    const [detailedContent, setDetailedContent] = useState('');
+    const [loading, setLoading] = useState(true);
+  
 
     const apiUrl = 'https://b681-158-247-242-10.ngrok-free.app';
 
@@ -18,8 +22,6 @@ const Product = () => {
         setShowContent(prevShowContent => !prevShowContent);
     };
     const productNumber = 1;
-    const location = useLocation();
-    const productId = location.state?.productId;
 
   
     useEffect(() => {
@@ -35,14 +37,19 @@ const Product = () => {
                 setProductData(res.data); 
                 setSummaryContent(res.data.shortDescription);
                 setDetailedContent(res.data.description);
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching data:', error);
+                setLoading(false);
             }
         };
 
         send(); // 초기 렌더링 시 데이터 가져오기 호출
     }, []);
-    const navigate = useNavigate();
+    if (loading) {
+      return <Spinner />;
+    }
+    
     const addToCart = async () => {
       try {
           const accessToken = localStorage.getItem('accessToken');
@@ -74,7 +81,9 @@ const Product = () => {
           alert('상품을 장바구니에 추가하는데 문제가 발생했습니다.2');
       }
   };
-    
+    const allReviews = () =>{
+      navigate('/reviews', {state : {productId}})
+    }
     return (
       <Container>
         <Box>
@@ -118,7 +127,7 @@ const Product = () => {
               <CostPerformance>배송이 빨라요</CostPerformance>
             </BarChart>
             <ReviewButtonContainer>
-                <ReviewButton>리뷰 더보기</ReviewButton>
+                <ReviewButton onClick={allReviews}>리뷰 더보기</ReviewButton>
             </ReviewButtonContainer>
           </ReviewBox>
           <ChoseBox>
@@ -135,6 +144,29 @@ const Product = () => {
   );
 };
 export default Product;
+
+const spin = keyframes`
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+`;
+
+const Spinner = styled.div`
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border-top: 4px solid black;
+  animation: ${spin} 1s linear infinite;
+
+  position: fixed;   
+  top: 50%;   
+  left: 50%;
+  transform: translate(-50%, -50%); 
+`;
 
 const PriceContainer = styled.div`
   display: flex;
