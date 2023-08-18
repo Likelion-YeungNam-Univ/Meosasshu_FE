@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import styled from 'styled-components'
 import logoPath from '../assets/logo2.png';
 import { useDaumPostcodePopup } from 'react-daum-postcode';
 
 const SignUp = () => {
+    const navigate = useNavigate();
     const open = useDaumPostcodePopup("//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js");
 
     const [zonecode,setZonecode]=useState("")
@@ -26,8 +28,7 @@ const SignUp = () => {
   
       setZonecode(data.zonecode);
       setAddress(fullAddress);
-   
-      //console.log(data); 
+
   
     };
     const handleClick = () => {
@@ -82,25 +83,30 @@ const birthday = `${year}-${month}-${day}`;
 
 const apiUrl = 'http://118.67.134.65:8080';
 
-const onSubmit = () => {
-    axios
-    .post(apiUrl + '/api/v1/auth/register', {
-        email: email,
-        password: pw,
-        name: name,
-        mobileNumber: tel,
-        birthDate: birthday,
-        gender: gender,
-        city: address,
-        street: ' ',
-        zipcode: zonecode,
-    },{})
-    .then((response) => {
-        console.log(response);
-        alert("회원가입이 완료되었습니다.")
-      })
-};
+const onSubmit = async (event) => {
+    event.preventDefault();
 
+    try {
+        const response = await axios.post(apiUrl + '/api/v1/auth/register', {
+            email: email,
+            password: pw,
+            name: name,
+            mobileNumber: tel,
+            birthDate: birthday,
+            gender: gender,
+            city: address,
+            street: ' ',
+            zipcode: zonecode,
+        });
+
+        console.log(response);
+        alert("회원가입이 완료되었습니다. 로그인 페이지로 이동합니다.");
+        navigate('/');
+    } catch (error) {
+        console.error("회원가입 중 오류 발생:", error);
+        alert("회원가입 중 오류가 발생했습니다. 다시 시도해주세요.");
+    }
+};
 
     return(
         <>

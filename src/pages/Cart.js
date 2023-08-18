@@ -19,7 +19,7 @@ const Cart = () => {
     return(
         <>
         <CartBox>
-        <Nav backTo="/">장바구니</Nav>
+        <Nav backTo="/main">장바구니</Nav>
         <hr style={{border:'solid 1.5px #F0F1F5'}}/>
         <CartList/>
         </CartBox>

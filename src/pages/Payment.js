@@ -41,13 +41,12 @@ const Payment = () => {
   
         const addressResponse = await axios.get(apiUrl + '/api/v1/account/address', {
           headers: {
-            'Content-Type': 'application/json',
-            'ngrok-skip-browser-warning': '69420',
-            'accessToken': accessToken,
-            'refreshToken': refreshToken,
-          },
-        });
-  
+              'Content-Type': 'application/json',
+              'ngrok-skip-browser-warning': '69420',
+              'accessToken': accessToken,
+              'refreshToken': refreshToken,
+          }
+      });
         console.log('Product Data:', productResponse.data);
         console.log('Address Data:', addressResponse.data);
   
@@ -153,9 +152,6 @@ const Payment = () => {
       console.error('Error placing order:', error);
     }
   };
-
-
-
 
 
   return (
