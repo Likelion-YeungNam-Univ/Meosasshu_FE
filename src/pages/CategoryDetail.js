@@ -43,7 +43,7 @@ const CategoryDetail = () => {
     return(
         <>
         <CategoryDetailBox>
-            <div style={{marginLeft:'25px'}}><Search/></div>
+            <Search/>
             <hr style={{border:'solid 10px #FFF'}}/>
             <ProductBlock>
                     {products.map((product) => (
@@ -51,7 +51,11 @@ const CategoryDetail = () => {
                             <ItemImage src={product.thumbnailUrl} alt={product.productName} />
                             <ItemTitle>{product.brand}</ItemTitle>
                             <ItemDescription>{product.productName}</ItemDescription>
-                            <ItemPrice>{product.price}</ItemPrice>
+                            <div style={{display:'flex', justifyContent:'space-between'}}>
+                                <ItemPrice>{product.price}원</ItemPrice>
+                                <span style={{marginRight:'10px', color:'#F00', fontSize:'18px'}}>50%</span>
+                            </div>
+                            <OriginalItemPrice>{product.price*2}원</OriginalItemPrice>
                             <hr style={{border:'solid 1.5px #F0F1F5'}}/>
                         </ProductContainer>
                     ))}
@@ -118,16 +122,22 @@ const ItemDescription = styled.div`
   margin-bottom: 3px;
 `;
 
-const ItemPrice = styled.div`
+const ItemPrice = styled.span`
   color: #000;
   font-family: Inter;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  
 `;
 
-// const SearchLink= styled(Link)`
-//     color: #000;
-//     text-decoration: none;
-// `;
+const OriginalItemPrice = styled.span`
+  color: #B4B4B4;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration: line-through;  
+`;
