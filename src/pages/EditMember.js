@@ -80,7 +80,7 @@ const EditMember = () => {
 const birthday = `${year}-${month}-${day}`;
 
 
-const apiUrl = process.env.REACT_APP_API_URL
+const apiUrl = 'http://118.67.134.65:8080'
 
 const onSubmit = () => {
     axios

@@ -157,7 +157,7 @@ const PopupButton = styled.button`
 const OrderInquiry = () => {
   const [data, setData] = useState(null);
   const [showLoginPopup, setShowLoginPopup] = useState(false); 
-  const URL = 'https://b681-158-247-242-10.ngrok-free.app';
+  const URL = 'http://118.67.134.65:8080';
   const navigate = useNavigate();
 
   const handleReviewButtonClick = (productId, orderId) => {

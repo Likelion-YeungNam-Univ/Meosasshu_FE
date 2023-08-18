@@ -17,7 +17,7 @@ const CategoryDetail = () => {
         navigate('/product', {state:{ productId }});
     };
 
-    const apiUrl='https://b681-158-247-242-10.ngrok-free.app';
+    const apiUrl='http://118.67.134.65:8080';
 
     const Data = async() => {
         try{
