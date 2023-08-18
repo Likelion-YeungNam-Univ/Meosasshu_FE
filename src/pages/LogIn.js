@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import UserIcon from "../assets/idicon.png"; 
 import PasswordIcon  from "../assets/pwicon.png"; 
-import Logo from "../assets/logo2.png";
+import loginlogo from "../assets/loginlogo.png";
 import Nav from '../components/Nav';
 import axios from 'axios';
 
@@ -39,7 +39,7 @@ const Login = () => {
         <LoginForm>
           <Nav/>
           <LogoIconContainer>
-            <Icon src={Logo} alt="로고 아이콘" />
+            <Icon src={loginlogo} alt="로고 아이콘" />
           </LogoIconContainer>
             <InputBox>
                 <div>
@@ -88,7 +88,6 @@ export default Login;
 
 
 const LoginBox = styled.div`
-border:1px solid #D8D8D8;
 @media only screen and (min-width: 430px) {
     width:365px;
     margin: auto;
@@ -128,8 +127,10 @@ const SharedStyles = `
   padding: 8px;
   box-sizing: border-box;
 `;
-
 const LogoIconContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 100%;
   height: 100%;
   margin-bottom: 80px;
@@ -137,8 +138,9 @@ const LogoIconContainer = styled.div`
 `;
 
 const Icon = styled.img`
-  width: 100%;
-  height: 100%;
+  width: 185px; /* 원하는 크기로 조절 */
+  height: 70px; /* 원하는 크기로 조절 */
+
 `;
 
 const Inputld = styled.input`
