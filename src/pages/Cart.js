@@ -5,6 +5,8 @@ import CartList from "../components/cart/CartList";
 import OrderBtn from "../components/cart/OrderBtn";
 
 const CartBox = styled.div`
+border:1px solid #D8D8D8;
+
 @media only screen and (min-width: 430px) {
     width:365px;
     margin: auto;

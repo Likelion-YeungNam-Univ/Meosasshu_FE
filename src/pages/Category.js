@@ -23,6 +23,7 @@ const Category = () => {
         <>
         <CategoryBox>
             <Search/>
+            <hr style={{ border: 'solid 5px #FFF' }} />
             <div style={{background:'#F0F1F5', height:'100vh', paddingTop:'20px'}}>
                 <CategoryBlock>
                         <CategoryItem  onClick={() => handleNavigation(1)}>
@@ -61,6 +62,7 @@ const CategoryBox = styled.div`
 @media only screen and (min-width: 430px) {
     width:365px;
     margin: auto;
+    high:100vh;
 }
 
 @media only screen and (max-width: 430px) {

@@ -8,14 +8,14 @@ import styled from "styled-components";
 
 const Main = () => {
   return (
-    <>
     <MainBox>
+    <MainContainer>
     <Search />
     <MainTop />
     <ProductRanking />
     <TapBar />
+    </MainContainer>
     </MainBox>
-    </>
   );
 };
 
@@ -31,3 +31,12 @@ const MainBox = styled.div`
 max-width: auto;
 margin: auto;
 }`;
+
+const MainContainer= styled.div`
+padding: 0px;
+width: 365px; 
+
+@media (max-width: 430px) {
+  width: 100%;
+}
+`;

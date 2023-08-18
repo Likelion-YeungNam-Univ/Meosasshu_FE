@@ -52,7 +52,7 @@ const ProductList = () => {
     };
 
     return (
-        <>
+        <ProductListBox>
             <ProductListBox>
                 <div style={{ display: 'flex', margin: '10px 5px 20px 5px', alignItems: 'center' }}>
                     <ArrowBackOutlinedIcon fontSize='large' />
@@ -74,7 +74,7 @@ const ProductList = () => {
                 <hr style={{ border: 'solid 30px #FFF' }} />
                 <TapBar />
             </ProductListBox>
-        </>
+        </ProductListBox>
     );
 }
 
