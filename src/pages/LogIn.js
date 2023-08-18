@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import UserIcon from "../assets/idicon.png"; 
 import PasswordIcon  from "../assets/pwicon.png"; 
@@ -31,6 +32,9 @@ const Login = () => {
       alert('로그인 실패');
     });
   };
+  const handleSignUP = () =>{
+    navigate('/signup')
+  }
 
   return(
    <LoginBox>
@@ -71,8 +75,7 @@ const Login = () => {
               </SubmitButton>
             </div>
             <p>
-                <SignUpButton
-                 href='/SignUp'>
+                <SignUpButton onClick={handleSignUP}>
                  회원가입
                  </SignUpButton>
             </p>
