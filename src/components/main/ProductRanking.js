@@ -62,7 +62,7 @@ const ProductRanking = () => {
 
             <ProductRaingkBlock>
                 {products.slice(2, 4).map((product, index) => (
-                    <Label key={product.id}>
+                    <Label onClick={() => goToProductDetail(product.id)} key={product.id}>
                         <ProductBox 
                             thumbnailUrl={product.thumbnailUrl}
                             brand={product.brand}
@@ -109,5 +109,5 @@ position:relative;
 const Ranking = styled.b`
 position: absolute;
 bottom: 145px;
-left: 130px
+left: 130px;
 `;
