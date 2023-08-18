@@ -26,7 +26,7 @@ const Login = () => {
       localStorage.setItem('accessToken', accessToken);
       localStorage.setItem('refreshToken', refreshToken);
       alert('로그인 성공');
-      navigate('/')
+      navigate('/main')
     }).catch((error) => {
       alert('로그인 실패');
     });
