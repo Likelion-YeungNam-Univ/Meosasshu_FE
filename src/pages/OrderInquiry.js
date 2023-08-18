@@ -154,6 +154,17 @@ const PopupButton = styled.button`
   }
 `;
 
+const OrderInquieryBox = styled.div`
+@media only screen and (min-width: 430px) {
+    width:365px;
+    margin: auto;
+}
+
+@media only screen and (max-width: 430px) {
+max-width: auto;
+margin: auto;
+}`;
+
 const OrderInquiry = () => {
   const [data, setData] = useState(null);
   const [showLoginPopup, setShowLoginPopup] = useState(false); 
@@ -165,10 +176,17 @@ const OrderInquiry = () => {
   };
 
   useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    const refreshToken = localStorage.getItem('refreshToken');
+  
+    // accessToken 또는 refreshToken이 없으면 팝업 표시
+    if (!accessToken || !refreshToken) {
+      setShowLoginPopup(true);
+      console.log(showLoginPopup);
+      return;  // 토큰이 없으면 아래의 API 호출 코드를 실행하지 않음
+    }
+  
     const fetchOrders = async () => {
-      const accessToken = localStorage.getItem('accessToken');
-      const refreshToken = localStorage.getItem('refreshToken');
-
       try {
         const response = await axios.get(URL + '/api/v1/orders', {
           headers: {
@@ -179,18 +197,18 @@ const OrderInquiry = () => {
             "refreshToken": refreshToken
           }
         });
-
+  
         setData(response.data);
       } catch (error) {
-        if (error.response && error.response.status === 401) {
+        if (error.response && error.response.status === 403) {
           setShowLoginPopup(true);
           console.log(showLoginPopup);
         } else {
-        console.error("error", error);
-      }
+          console.error("error", error);
+        }
       }
     };
-
+  
     fetchOrders();
   }, []);
 
@@ -199,7 +217,7 @@ const OrderInquiry = () => {
   }
 
   return (
-    <div>
+    <OrderInquieryBox>
       <Nav backTo="/profile">주문 조회</Nav>
       {data.content.map(order => (
         <OrderContainer key={order.orderId}>
@@ -243,7 +261,7 @@ const OrderInquiry = () => {
           </PopupInner>
         </Popup>
       )}
-    </div>
+    </OrderInquieryBox>
   );
 };
 

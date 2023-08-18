@@ -21,7 +21,6 @@ const Product = () => {
     const toggleContent = () => {
         setShowContent(prevShowContent => !prevShowContent);
     };
-    const productNumber = 1;
 
   
     useEffect(() => {
@@ -55,7 +54,7 @@ const Product = () => {
           const accessToken = localStorage.getItem('accessToken');
           const refreshToken = localStorage.getItem("refreshToken");
           const res = await axios.post(apiUrl + '/api/v1/cart', {
-              'productId': productNumber,
+              'productId': productId,
               'quantity':1,
           }, {
               headers: {
