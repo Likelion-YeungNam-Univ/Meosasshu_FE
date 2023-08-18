@@ -42,13 +42,26 @@ const CartList = () => {
             <div  key={product.productId}>
                 <div style={{display:'flex', alignItems:'center', margin:'10px', marginBottom:'0px'}}>
                     <img src={product.imageUrl} alt={product.productName} style={{marginLeft:'10px', width:'170px', height:'170px'}}/>
+                    <div style={{ display: 'flex', flexDirection: 'column', marginLeft: '10px'}}>
+                        <div style={{marginLeft:'10px'}}>
+                         <div style={{color: '#929294',fontSize: '15px'}}> {product.brand}</div>
+                         <div style={{marginTop:'10px'}}><b style={{fontSize: '18px'}}> {product.productName}</b></div>
+                        </div>
+                    </div>
                 </div>
                 <hr style={{border:'solid 1.5px #F0F1F5'}}/>
-                <ProductInform> {product.brand}</ProductInform>
-                <ProductInform> {product.productName}</ProductInform>
-                <ProductInform>상품 금액 {product.totalPrice}원</ProductInform>
-                <ProductInform>할인 50%</ProductInform>
-                <ProductInform>배송비 0원</ProductInform>
+                <div style={{margin:'5px 10px 15px'}}>
+                    <span style={{color: '#929294',fontSize: '18px', marginRight:'10px'}}>상품 금액</span>
+                    <span style={{fontSize: '18px'}}> {product.totalPrice}원</span>
+                </div>
+                <div style={{marginBottom: '15px'}}>
+                    <ProductInform>할인율 </ProductInform>
+                    <span style={{fontSize: '18px'}}>50%</span>
+                </div>
+                <div>
+                <ProductInform>배송비 </ProductInform>
+                <span style={{fontSize: '18px'}}>0원</span>
+                </div>
                 <hr style={{border:'solid 5px #F0F1F5'}}/>
             </div>
         ))}
@@ -63,7 +76,7 @@ const CartList = () => {
 export default CartList;
 
 
-const ProductInform = styled.div`
+const ProductInform = styled.span`
 margin: 5px 10px 15px;
 color: #929294;
 font-family: Inter;
@@ -98,3 +111,11 @@ font-weight: 550;
     height: 50px;
     margin-bottom: 15px;
 }`
+
+const OriginalPrice = styled.span`
+  color: #929294;
+  font-size: 15px;
+  text-decoration: line-through;
+
+  
+`;
