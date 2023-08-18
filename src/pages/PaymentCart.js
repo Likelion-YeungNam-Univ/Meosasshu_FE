@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
-const Payment = () => {
+const PaymentCart = () => {
   const [selectedOption, setSelectedOption] = useState('');
   const [productData, setProductData] = useState({});
   const [addressData, setAddressData] = useState({});
@@ -30,7 +30,7 @@ const Payment = () => {
         const accessToken = localStorage.getItem('accessToken');
         const refreshToken = localStorage.getItem('refreshToken');
           
-        const productResponse = await axios.get(`${apiUrl}/api/v1/products/${productId}/order-form?quantity=1`, {
+        const productResponse = await axios.get(`${apiUrl}/api/v1/cart`, {
           headers: {
             'Content-Type': 'application/json',
             'ngrok-skip-browser-warning': '69420',
@@ -125,15 +125,13 @@ const Payment = () => {
         },
         orderProducts: [
           {
-            "quantity": 1,
-            "productId": productId,
+            quantity: 1,
+            productId: productData.productId,
           },
         ],
-       
       };
-      console.log('확인',productId);
       
-      console.log('확인 orderData:', orderData); // orderData 값 확인
+      console.log('orderData:', orderData); // orderData 값 확인
       
       const orderResponse = await axios.post(
         apiUrl + '/api/v1/orders',
@@ -147,6 +145,7 @@ const Payment = () => {
           },
         }
       );
+
       console.log('Order response:', orderResponse.data);
       requestPay(orderResponse.data.orderId);
     } catch (error) {
@@ -220,7 +219,7 @@ const Payment = () => {
  );
 };
 
-export default Payment;
+export default PaymentCart;
 
 const PaymentBox = styled.div`
 @media only screen and (min-width: 430px) {

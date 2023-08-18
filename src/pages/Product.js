@@ -144,8 +144,8 @@ const Product = () => {
                 <Buybutton>장바구니</Buybutton>
             </Link>
 
-            <div>
-                <Buybutton purchase onClick={orderAdd}>구매</Buybutton>
+            <div onClick={orderAdd}>
+                <Buybutton purchase>구매</Buybutton>
             </div>
           </ChoseBox>
       </Box>

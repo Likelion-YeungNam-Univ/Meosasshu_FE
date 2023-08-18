@@ -54,7 +54,7 @@ const CartList = () => {
         ))}
         <hr style={{border:'solid 35px #FFF'}}/>
         <div style={{textAlign: 'center',position: 'fixed', left: '0', bottom: '0', width: '100%', backgroundColor:'#FFF'}}>
-            <Link to="/payment"><OrderBtnInput type="submit" value={`${totalOrderPrice }원 주문하기`}/></Link>
+            <Link to="/paymentcart"><OrderBtnInput type="submit" value={`${totalOrderPrice }원 주문하기`}/></Link>
         </div>
         </>
     )
