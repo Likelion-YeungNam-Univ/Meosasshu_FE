@@ -91,7 +91,7 @@ const Review = () => {
     }, [orderId, productId]);
 
     return (
-        <Container>
+        <ReviewBox>
             <Nav backTo='/orderinquiry'>리뷰</Nav>
             {productInfo && (
                 <div>
@@ -153,13 +153,22 @@ const Review = () => {
                     등록하기
                 </SubmitButton>
             </ReviewContainer>
-        </Container>
+        </ReviewBox>
     );
 };
 
 export default Review;
 
+const ReviewBox = styled.div`
+@media only screen and (min-width: 430px) {
+    width:365px;
+    margin: auto;
+}
 
+@media only screen and (max-width: 430px) {
+max-width: auto;
+margin: auto;
+}`;
 const Container = styled.div`
     font-family: Arial, sans-serif;
     padding: 2vh;
