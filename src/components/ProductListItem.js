@@ -1,12 +1,8 @@
 import React from 'react'
 import styled from 'styled-components';
-//import { useNavigate } from 'react-router-dom';
 
 const ProductListItem = ({res}) => {
-    // const navigate = useNavigate();
-    // const goProduct = ()=>{
-    //   navigate(`//${res.id}`)
-    // }
+
 
   return (
     <>
@@ -14,7 +10,11 @@ const ProductListItem = ({res}) => {
           <ItemImage src={res.thumbnailUrl} alt="상품 이미지" />
           <ItemTitle>{res.brand}</ItemTitle>
           <ItemDescription>{res.productName}</ItemDescription>
-          <ItemPrice>{res.price}</ItemPrice>
+          <div style={{display:'flex', justifyContent:'space-between'}}>
+            <ItemPrice>{res.price}원</ItemPrice>
+            <span style={{marginRight:'10px', color:'#F00', fontSize:'18px'}}>50%</span>
+          </div>
+          <OriginalItemPrice>{res.price*2}원</OriginalItemPrice>
           <hr style={{border:'solid 1.5px #F0F1F5'}}/>
     </ProductContainer>
     </>
@@ -57,11 +57,21 @@ const ItemDescription = styled.div`
   margin-bottom: 3px;
 `;
 
-const ItemPrice = styled.div`
+const ItemPrice = styled.span`
   color: #000;
   font-family: Inter;
   font-size: 18px;
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+`;
+
+const OriginalItemPrice = styled.span`
+  color: #B4B4B4;
+  font-family: Inter;
+  font-size: 15px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  text-decoration: line-through;  
 `;
