@@ -16,7 +16,7 @@ const Product = () => {
     const [loading, setLoading] = useState(true);
   
 
-    const apiUrl = 'https://b681-158-247-242-10.ngrok-free.app';
+    const apiUrl = 'http://118.67.134.65:8080';
 
     const toggleContent = () => {
         setShowContent(prevShowContent => !prevShowContent);
@@ -85,6 +85,7 @@ const Product = () => {
       navigate('/reviews', {state : {productId}})
     }
     return (
+     <ProductBox>
       <Container>
         <Box>
           <Nav backTo='/productlist'></Nav>
@@ -141,9 +142,21 @@ const Product = () => {
           </ChoseBox>
       </Box>
     </Container>
+  </ProductBox>
   );
 };
 export default Product;
+
+const ProductBox = styled.div`
+@media only screen and (min-width: 430px) {
+    width:365px;
+    margin: auto;
+}
+
+@media only screen and (max-width: 430px) {
+max-width: auto;
+margin: auto;
+}`;
 
 const spin = keyframes`
   from {
