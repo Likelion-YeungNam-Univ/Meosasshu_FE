@@ -25,7 +25,7 @@ const Profile = () => {
   const handleLogout =() =>{
     localStorage.removeItem("accessToken");
     localStorage.removeItem("refreshToken");
-    navigate("/");
+    navigate("/main");
   };
 
   return (
