@@ -1,4 +1,3 @@
-
 import styled from 'styled-components';
 import Nav from '../components/Nav';
 import React, { useState, useEffect } from 'react';
@@ -16,6 +15,12 @@ const Payment = () => {
   const apiUrl = 'https://b681-158-247-242-10.ngrok-free.app'; // apiUrl을 여기에 정의해주세요
 
   useEffect(() => {
+    const jquery = document.createElement("script");
+    jquery.src="https://code.jquery.com/jquery-3.6.0.min.js";
+    const iamport = document.createElement("script");
+    iamport.src = "https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"
+    document.head.appendChild(jquery); document.head.appendChild(iamport);
+
     const fetchData = async () => {
       try {
         const accessToken = localStorage.getItem('accessToken');
@@ -50,23 +55,56 @@ const Payment = () => {
         setProductData(mergedData);
         setAddressData(addressResponse.data);
         console.log('Merged Data:', mergedData);
-        console.log('Merged Data:', mergedData);
         // 추가된 부분: orderProducts 로그 출력
         if (mergedData.orderProducts) {
           console.log('Order Products:', mergedData.orderProducts);
         }
 
         // productId 값이 null이 아닌지 확인 후, 제대로 설정해줍니다.
-        if (mergedData.productId) {
-          setProductData(prevData => ({ ...prevData, productId: mergedData.productId }));
+        if (mergedData.orderProducts && mergedData.orderProducts[0].productId) {
+          setProductData(prevData => ({ ...prevData, productId: mergedData.orderProducts[0].productId }));
         }
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
-  
     fetchData();
+    return () => {
+      document.head.removeChild(jquery);
+      document.head.removeChild(iamport);
+    };
   }, []);
+
+  const requestPay = (orderId) => {
+    const { IMP } = window;
+    IMP.init('imp36544802');
+    
+    // orderId를 활용하여 결제 요청 데이터 구성
+    IMP.request_pay(
+      {
+        // 결제 요청 데이터
+        pg: 'kakaopay', // PG사
+        pay_method: 'card', // 결제수단
+        merchant_uid: `${orderId}`, // 주문번호
+        amount:  29 ,// 결제금액
+        name: '아임포트 결제 데이터 분석', // 주문명
+        buyer_name: '홍길동', // 구매자 이름
+        buyer_tel: '01012341234', // 구매자 전화번호
+        buyer_email: 'example@example', // 구매자 이메일
+        buyer_addr: '신사동 661-16', // 구매자 주소
+        buyer_postcode: '06018', // 구매자 우편번호
+        // 나머지 결제 요청 데이터
+      },
+      (rsp) => {
+        if (rsp.success) {
+          alert('success');
+        } else {
+          alert('결제에 실패하였습니다. 에러 내용: ' + rsp.error_msg);
+        }
+      }
+    );
+  };
+
   const handleOrder = async () => {
     try {
       const accessToken = localStorage.getItem('accessToken');
@@ -84,14 +122,13 @@ const Payment = () => {
         orderProducts: [
           {
             quantity: 1,
-            productId:productData.orderProducts[0].productId,
+            productId: productData.productId,
           },
         ],
-
       };
-  
+      
       console.log('orderData:', orderData); // orderData 값 확인
-  
+      
       const orderResponse = await axios.post(
         apiUrl + '/api/v1/orders',
         orderData,
@@ -104,11 +141,17 @@ const Payment = () => {
           },
         }
       );
-  
+
+      console.log('Order response:', orderResponse.data);
+      requestPay(orderResponse.data.orderId);
     } catch (error) {
       console.error('Error placing order:', error);
     }
   };
+
+
+
+
 
   return (
     <section>
