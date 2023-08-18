@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import TapBar from "../components/TapBar";
 import axios from "axios";
 import ListenPopUp from "./ListenPopUp";
+import Nav from "../components/Nav";
 
 const Profile = () => {
   const navigate = useNavigate(); 
@@ -46,7 +47,7 @@ const Profile = () => {
 
   return (
     <ProfileBox>
-      <Header>내 정보</Header>
+      <Nav backTo="/">내 정보</Nav>
       <Body>
         <Line />
         <ContentWrapper>
