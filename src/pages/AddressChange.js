@@ -50,7 +50,6 @@ const LoginPageContainer = styled.div`
 `;
 
 const LoginForm = styled.div`
-  border: 1px solid #ccc;
   width: 365px; 
   
   @media (max-width: 768px) {
