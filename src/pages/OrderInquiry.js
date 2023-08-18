@@ -215,6 +215,9 @@ const OrderInquiry = () => {
   if (!data || !data.content) {
     return <div>로딩 중...</div>;
   }
+  const productdetail = (productId) =>{
+    navigate('/product' , {state : {productId}})
+  }
 
   return (
     <OrderInquieryBox>
@@ -240,7 +243,9 @@ const OrderInquiry = () => {
                     </ProductDetails>
                   </TopRow>
                   <ButtonContainer>
-                    <ActionButton>배송조회</ActionButton>
+                  <ActionButton onClick={() => productdetail(product.productId)}>
+                      상품 상세 조회
+                  </ActionButton>
                     <ActionButton style={{border: '1px solid #BCC454', color:'#BCC454'}} onClick={() => handleReviewButtonClick(product.productId, order.orderId)}>
                       리뷰 작성하기
                     </ActionButton>
