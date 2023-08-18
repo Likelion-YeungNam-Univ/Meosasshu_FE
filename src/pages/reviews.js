@@ -9,7 +9,7 @@ const Reviews = () => {
   const location = useLocation();
   const productId = location.state?.productId || 1;
   console.log(productId);
-  const url = 'https://b681-158-247-242-10.ngrok-free.app'
+  const url = 'http://118.67.134.65:8080'
   useEffect(() => {
     const fetchData = async () => {
         try {

@@ -13,7 +13,7 @@ const Payment = () => {
     setSelectedOption(event.target.value);
   };
 
-  const apiUrl = 'https://b681-158-247-242-10.ngrok-free.app'; // apiUrl을 여기에 정의해주세요
+  const apiUrl = 'http://118.67.134.65:8080'; // apiUrl을 여기에 정의해주세요
 
   useEffect(() => {
     const fetchData = async () => {
