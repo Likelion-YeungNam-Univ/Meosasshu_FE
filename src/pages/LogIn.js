@@ -44,7 +44,7 @@ const Login = () => {
             <InputBox>
                 <div>
                     <Inputld
-                     type='email'
+                     type='text'
                      id="email"
                      placeholder="아이디"
                      value={email}
