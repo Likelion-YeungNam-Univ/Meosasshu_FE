@@ -40,7 +40,7 @@ const TapBar = () => {
                     </TapBarMenuLink>
                 </div>
                 <div style={{textAlign:'center'}}>
-                    <TapBarMenuLink to='/'>
+                    <TapBarMenuLink to='/main'>
                         <HomeIcon fontSize='large' sx={{marginTop:'10px'}}/>
                         <TapBarMenuName>메인 화면</TapBarMenuName>
                     </TapBarMenuLink>
