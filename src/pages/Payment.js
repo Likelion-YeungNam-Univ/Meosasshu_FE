@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import Nav from '../components/Nav';
 import React, { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 
 const Payment = () => {
@@ -12,6 +13,9 @@ const Payment = () => {
     setSelectedOption(event.target.value);
   };
 
+  const location = useLocation();
+  const productId = location.state && location.state.productId ? location.state.productId : 1;
+  console.log(productId);
   const apiUrl = 'http://118.67.134.65:8080'; // apiUrl을 여기에 정의해주세요
 
   useEffect(() => {
@@ -26,7 +30,7 @@ const Payment = () => {
         const accessToken = localStorage.getItem('accessToken');
         const refreshToken = localStorage.getItem('refreshToken');
           
-        const productResponse = await axios.get(apiUrl + '/api/v1/products/1/order-form?quantity=1', {
+        const productResponse = await axios.get(`${apiUrl}/api/v1/products/${productId}/order-form?quantity=1`, {
           headers: {
             'Content-Type': 'application/json',
             'ngrok-skip-browser-warning': '69420',
@@ -184,7 +188,7 @@ const Payment = () => {
           <Price>
             <FlexContainer>
               <Span>총 상품금액</Span>
-              <Span>{productData.totalPrice/2}</Span>
+              <Span>{productData.totalPrice}</Span>
             </FlexContainer>
           </Price>
           <Price>

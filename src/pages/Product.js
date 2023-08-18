@@ -4,6 +4,9 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useNavigate, useLocation } from 'react-router-dom';
+import { Divider } from '@mui/material';
+
+
 
 const Product = () => {
     const navigate = useNavigate();
@@ -15,7 +18,7 @@ const Product = () => {
     const [detailedContent, setDetailedContent] = useState('');
     const [loading, setLoading] = useState(true);
   
-
+ 
     const apiUrl = 'http://118.67.134.65:8080';
 
     const toggleContent = () => {
@@ -83,6 +86,12 @@ const Product = () => {
     const allReviews = () =>{
       navigate('/reviews', {state : {productId}})
     }
+
+    const orderAdd = () =>{
+      navigate('/payment', {state : {productId}})
+      console.log('구매 버튼 클릭')
+    }
+    
     return (
      <ProductBox>
       <Container>
@@ -135,9 +144,9 @@ const Product = () => {
                 <Buybutton>장바구니</Buybutton>
             </Link>
 
-            <Link to="/payment">
-                <Buybutton purchase>구매</Buybutton>
-            </Link>
+            <div>
+                <Buybutton purchase onClick={orderAdd}>구매</Buybutton>
+            </div>
           </ChoseBox>
       </Box>
     </Container>
