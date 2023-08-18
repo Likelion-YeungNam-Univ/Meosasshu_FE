@@ -12,7 +12,7 @@ const Login = () => {
   const [pw, setPw] = useState('');
   const navigate = useNavigate();
 
-  const apiUrl ='http://118.67.134.65:8080';
+  const apiUrl ='https://c297-2001-e60-109d-2c59-8ce9-5099-f68c-2168.ngrok-free.app';
   const api = axios.create({
     timeout: 10000, 
   });

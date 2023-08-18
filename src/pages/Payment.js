@@ -16,7 +16,7 @@ const Payment = () => {
   const location = useLocation();
   const productId = location.state && location.state.productId ? location.state.productId : 1;
   console.log(productId);
-  const apiUrl = 'http://118.67.134.65:8080'; // apiUrl을 여기에 정의해주세요
+  const apiUrl = 'https://c297-2001-e60-109d-2c59-8ce9-5099-f68c-2168.ngrok-free.app'; // apiUrl을 여기에 정의해주세요
 
   useEffect(() => {
     const jquery = document.createElement("script");

@@ -7,7 +7,7 @@ import {  useNavigate } from 'react-router-dom';
 
 const ProductRanking = () => {
     const [products, setProducts] = useState([]);
-    const url = 'http://118.67.134.65:8080'
+    const url = 'https://c297-2001-e60-109d-2c59-8ce9-5099-f68c-2168.ngrok-free.app'
     const API_URL = url + '/api/v1/products/top-sellers';
 
     const navigate = useNavigate();

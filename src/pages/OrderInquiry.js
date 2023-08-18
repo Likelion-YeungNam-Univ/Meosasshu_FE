@@ -168,7 +168,7 @@ margin: auto;
 const OrderInquiry = () => {
   const [data, setData] = useState(null);
   const [showLoginPopup, setShowLoginPopup] = useState(false); 
-  const URL = 'http://118.67.134.65:8080';
+  const URL = 'https://c297-2001-e60-109d-2c59-8ce9-5099-f68c-2168.ngrok-free.app';
   const navigate = useNavigate();
 
   const handleReviewButtonClick = (productId, orderId) => {

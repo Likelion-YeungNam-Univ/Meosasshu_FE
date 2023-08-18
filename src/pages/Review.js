@@ -7,7 +7,7 @@ import priceicon from "../assets/가성비 아이콘.png";
 import deliveryicon from "../assets/배송 아이콘.png";
 import qualityicon from "../assets/품질 아이콘.png";
 
-const Url2 = 'http://118.67.134.65:8080';
+const Url2 = 'https://c297-2001-e60-109d-2c59-8ce9-5099-f68c-2168.ngrok-free.app';
 
 const Review = () => {
     const [selectedKeywords, setSelectedKeywords] = useState([]);
